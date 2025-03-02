@@ -43,24 +43,65 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Validate form
+            if (!validateForm()) {
+                return false;
+            }
+            
             // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
+            const formData = new FormData(contactForm);
             
-            // Here you would typically send this data to a server
-            // For now, we'll just log it and show a success message
-            console.log('Form submission:', formData);
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
             
-            // Show success message
-            contactForm.innerHTML = `
-                <div class="form-success">
-                    <h3>Thank you for reaching out!</h3>
-                    <p>I'll get back to you as soon as possible.</p>
-                </div>
-            `;
+            // Send form data to server using fetch API
+            fetch('process-form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Show success message
+                contactForm.innerHTML = `
+                    <div class="form-success">
+                        <h3>Thank you for reaching out!</h3>
+                        <p>I'll get back to you as soon as possible.</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Restore the button
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+                
+                // Show error message
+                const errorElement = document.createElement('div');
+                errorElement.className = 'form-error';
+                errorElement.innerHTML = `
+                    <p>Sorry, there was a problem sending your message.</p>
+                    <p>Please try again or contact me directly at contact@mohamedelhag.com</p>
+                `;
+                
+                // Insert error message after the submit button
+                submitButton.parentNode.insertBefore(errorElement, submitButton.nextSibling);
+                
+                // Remove error message after 5 seconds
+                setTimeout(() => {
+                    if (errorElement.parentNode) {
+                        errorElement.parentNode.removeChild(errorElement);
+                    }
+                }, 5000);
+            });
         });
     }
     
