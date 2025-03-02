@@ -1,0 +1,23 @@
+{
+    "name": "moahamed-portfolio",
+    "version": "1.0.0",
+    "description": "A portfolio website showcasing all of the projects Mohamed Elhag has been working on",
+    "main": "index.html",
+    "scripts": {
+      "start": "npx serve",
+      "dev": "npx live-server"
+    },
+    "keywords": [
+      "portfolio",
+      "data-analytics",
+      "data-science",
+      "programming",
+      "machine-learning"
+    ],
+    "author": "Mohamed",
+    "license": "MIT",
+    "devDependencies": {
+      "live-server": "^1.2.2",
+      "serve": "^14.2.1"
+    }
+  }

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed's RAG Assistant</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/project-styles.css">
+    <style>
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            background-color: var(--bg-secondary);
+        }
+
+        .chat-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chat-description {
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .chat-demo-notes {
+            background-color: var(--accent-color-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            height: 350px;
+            overflow-y: auto;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: var(--bg-primary);
+            box-shadow: inset 0 2px 5px var(--shadow-color);
+        }
+
+        .message {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .user-message {
+            background-color: var(--accent-color);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .assistant-message {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .sources {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .thinking {
+            padding: 10px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .chat-input button {
+            padding: 12px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input button:hover {
+            background-color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .typing-indicator {
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        .typing-dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            animation: typing 1.4s infinite ease-in-out;
+            margin-right: 2px;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+            30% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+        
+        /* Dark mode adjustments */
+        .github-link {
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .github-link p {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #24292e;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .github-button:hover {
+            background-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .github-icon {
+            margin-right: 5px;
+        }
+
+                /* Dark mode adjustments */
+        [data-theme="dark"] .assistant-message {
+            background-color: #333;
+        }
+        
+        [data-theme="dark"] .github-button {
+            background-color: #2f363d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects" class="active">Projects</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <span class="theme-toggle-icon">☀️</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="project-hero" class="project-hero">
+            <div class="container">
+                <div class="project-navigation">
+                    <a href="index.html#projects" class="btn secondary">← Back to Projects</a>
+                </div>
+                <h1 class="project-title">Ask Me About Mohamed</h1>
+                <p class="project-tagline">A simple RAG (Retrieval-Augmented Generation) demonstration using my resume data</p>
+            </div>
+        </section>
+
+        <section id="rag-demo" class="project-content">
+            <div class="container">
+                <div class="chat-container">
+                    <h2 class="chat-title">Interactive Resume Assistant</h2>
+                    <div class="chat-description">
+                        <p>This demonstration showcases a client-side implementation of a Retrieval-Augmented Generation (RAG) system. It uses pre-computed embeddings of my resume content and similarity search to find relevant information before generating a response.</p>
+                    </div>
+                    
+                    <div class="chat-demo-notes">
+                        <p><strong>Note:</strong> This is a simplified demo that runs entirely in your browser. A full RAG system would use more sophisticated embedding models, vector databases, and larger language models running on a server.</p>
+                        <p>Try asking questions like:
+                        <ul>
+                            <li>"What experience does Mohamed have in data analysis?"</li>
+                            <li>"Tell me about Mohamed's skills."</li>
+                            <li>"What projects has Mohamed worked on?"</li>
+                            <li>"What certifications does Mohamed have?"</li>
+                        </ul>
+                        </p>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message assistant-message">
+                            Hello! I'm a simple assistant that can answer questions about Mohamed Elhag based on his resume data. How can I help you today?
+                        </div>
+                    </div>
+
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Ask about Mohamed Elhag's experience, skills, or projects...">
+                        <button onclick="sendMessage()">Ask</button>
+                    </div>
+                    
+                    <div class="github-link">
+                        <p>Want to see a more complete version of a local RAG application?</p>
+                        <a href="https://github.com/kiillmo/Georgetown/tree/main/Local%20LLM%20RAG%20Project" target="_blank" class="github-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="github-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            Check out my GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mohamed Elhag. All rights reserved.</p>
+            <p class="footer-tagline">Building technology with human values at the center.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.querySelector('.theme-toggle-icon').textContent = '🌙';
+            }
+            
+            // Theme toggle functionality
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                if (document.body.getAttribute('data-theme') === 'dark') {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    document.querySelector('.theme-toggle-icon').textContent = '☀️';
+                } else {
+                    document.body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    document.querySelector('.theme-toggle-icon').textContent = '🌙';
+                }
+            });
+        });
+
+        // Mohamed's resume data chunks for retrieval
+        const resumeData = [
+            {
+                text: "Mohamed Elhag is a data-driven professional with 5+ years of professional experience in data analysis, quality assurance, and process automation. He combines a strong mechanical engineering foundation with advanced data analytics expertise to streamline operations and deliver actionable insight that drive strategic decision-making.",
+                embedding: [0.12, 0.23, 0.34, 0.45, 0.56]  // simplified embedding vector
+            },
+            {
+                text: "Core competencies include Data Visualization, Data Cleaning, Statistical Analysis, Predictive Modeling, Process Automation, Workflow Optimization, Dashboard Development, Business Management, and Project Development.",
+                embedding: [0.22, 0.33, 0.44, 0.55, 0.66]
+            },
+            {
+                text: "Education: Georgetown University, Washington, DC: Master of Science in Data Science and Analytics, Starting Fall 2025 (Expected Graduation: 2027). Old Dominion University, Norfolk, VA: Bachelor of Science in Mechanical Engineering.",
+                embedding: [0.32, 0.43, 0.54, 0.65, 0.76]
+            },
+            {
+                text: "Mohamed currently works at the Federal Trade Commission as a Data Analyst (Contracted by AMSG) from 2022 to present. He cleanses, wrangles, and visualizes diverse datasets to extract meaningful insights for the organization, applying data cleaning techniques to ensure data accuracy and reliability.",
+                embedding: [0.42, 0.53, 0.64, 0.75, 0.86]
+            },
+            {
+                text: "At the FTC, Mohamed develops dynamic dashboards in Excel to present key performance indicators and critical metrics for the Chief Administrative Services Officer (CASO). He effectively communicates complex data findings through visually appealing charts, graphs, and tables.",
+                embedding: [0.52, 0.63, 0.74, 0.85, 0.96]
+            },
+            {
+                text: "At the FTC, Mohamed spearheads the response to Congressional Relations inquiries and Freedom of Information Act (FOIA) requests, managing sensitive data and synthesizing relevant information to comply with legislative and public disclosure requirements.",
+                embedding: [0.11, 0.22, 0.33, 0.44, 0.55]
+            },
+            {
+                text: "Mohamed collaborates proactively with cross-functional teams at the FTC to gauge business imperatives and elevate data management practices. He pioneers the integration of Python scripts to automate tasks, identify and rectify process bottlenecks, and advance overall data quality and operational efficacy.",
+                embedding: [0.21, 0.32, 0.43, 0.54, 0.65]
+            },
+            {
+                text: "At the FTC, Mohamed conducted an in-depth analysis of the agency's parking space utilization rate, identifying underused spaces and optimizing allocations, resulting in a cost saving of $500,000. These savings were critical in light of impending budget cuts announced by Congress.",
+                embedding: [0.31, 0.42, 0.53, 0.64, 0.75]
+            },
+            {
+                text: "Mohamed worked at the Department of Veterans Affairs as a Sr. Statistician (Part Time, Contracted by AMSG) from 2024-2025. He supported the VHA GAO Training Area of Concern (TAoC) initiative by applying statistical methods to evaluate training programs, identify gaps, and inform data-driven policy decisions.",
+                embedding: [0.41, 0.52, 0.63, 0.74, 0.85]
+            },
+            {
+                text: "At the VA, Mohamed collaborated with program offices and stakeholders to gather, validate, and analyze various data sets, ensuring reliable metrics and insights guide VHA training governance. He prepared charts, tables, and visualizations that simplify complex findings for leadership and decision-makers.",
+                embedding: [0.51, 0.62, 0.73, 0.84, 0.95]
+            },
+            {
+                text: "Mohamed worked at the Department of Homeland Security in Leesburg, VA in 2022 as a Data Analyst (Contracted by Plexus Scientific Corporation). He conducted in-depth data collection and gathering from various sources, utilizing keen analytical insight to review and interpret information using data analysis tools.",
+                embedding: [0.61, 0.72, 0.83, 0.94, 0.15]
+            },
+            {
+                text: "At DHS, Mohamed employed profound familiarity with Microsoft Excel to identify patterns and trends as well as any potential risks through comprehensive data analysis, directly reporting to the Chief of Staff and Federal Coordinator. He improved personal workflow productivity by 50% through application of skills such as automation.",
+                embedding: [0.71, 0.82, 0.93, 0.14, 0.25]
+            },
+            {
+                text: "Mohamed owned Xmas Everything in Arlington, VA from 2019-2022, a 6-figure digital company that he independently built in Q4 2019 to support personal living expenses while at Old Dominion University. He directed all operations by seasonally managing and facilitating customer touchpoint, marketing processes, and other day-to-day procedures.",
+                embedding: [0.81, 0.92, 0.13, 0.24, 0.35]
+            },
+            {
+                text: "As a Digital Marketer at Xmas Everything, Mohamed utilized marketing tools like Canva and Facebook Ads to generate highly profitable advertisements. He optimized the Return on Investment (ROI) to spend the least amount of money for the most amount of return.",
+                embedding: [0.91, 0.12, 0.23, 0.34, 0.45]
+            },
+            {
+                text: "As a Data Analyst at Xmas Everything, Mohamed cleaned customer data to create an optimal customer dataset Facebook Lookalike Audience. He analyzed available CSV data such as customer location, website click-through rate and product ROI to spot customer trends and create a gameplan for a profitable marketing strategy.",
+                embedding: [0.11, 0.91, 0.81, 0.71, 0.61]
+            },
+            {
+                text: "At Xmas Everything, Mohamed interpolated general eCommerce data to find the ideal time to both ramp up marketing and slow it down in an effort to keep ROI as high as possible. Data was later revamped with the new information collected to help optimize the following year's marketing strategy.",
+                embedding: [0.21, 0.81, 0.71, 0.61, 0.51]
+            },
+            {
+                text: "Mohamed has worked on a Lunar Lander with Reinforcement Learning project. He trained a reinforcement learning agent to control a lunar lander in a simulated environment. The project illustrates the evolution of an initially erratic agent into one that can consistently achieve successful landings through iterative learning.",
+                embedding: [0.31, 0.71, 0.61, 0.51, 0.41]
+            },
+            {
+                text: "The Lunar Lander project used technologies including Python, OpenAI Gym, Tensorflow, and Jupyter Notebook. Key highlights were applying reinforcement learning techniques to tackle a complex control task and demonstrating real-time improvement in agent performance, underscoring the power of iterative training.",
+                embedding: [0.41, 0.61, 0.51, 0.41, 0.31]
+            },
+            {
+                text: "Mohamed has worked on revisiting his E-commerce Data (Xmas Everything) project. He reanalyzed historical data from his store using advanced analytics techniques. This project reflects both a nostalgic look back and a demonstration of his growth from basic analytics to more sophisticated data processing.",
+                embedding: [0.51, 0.51, 0.41, 0.31, 0.21]
+            },
+            {
+                text: "The E-commerce Data project used technologies including Python, Jupyter Notebook, Pandas, Matplotlib, and Geopandas. Key highlights were employing modern data analysis methods to uncover trends and actionable insights in past sales data, and highlighting the evolution of his analytical skills and ability to derive value from complex datasets.",
+                embedding: [0.61, 0.41, 0.31, 0.21, 0.11]
+            },
+            {
+                text: "Mohamed has worked on a Local LLM Utilizing RAG project. He developed a local large language model (LLM) that uses Retrieval Augmented Generation (RAG) to retrieve information about a custom ASI Methodology. This was initiated as a potential in-house alternative to vendor solutions.",
+                embedding: [0.71, 0.31, 0.21, 0.11, 0.91]
+            },
+            {
+                text: "The Local LLM project used technologies including Python, Ollama, Streamlit, Langchain, and Chromadb. Key highlights were building an interactive Streamlit interface allowing users to query the local LLM, and demonstrating the feasibility and versatility of deploying in-house LLMs with integrated RAG capabilities.",
+                embedding: [0.81, 0.21, 0.11, 0.91, 0.81]
+            },
+            {
+                text: "Mohamed's technical skills include Microsoft Office, IBM db2, SQL, NoSQL, Python, MATLAB, IBM Cognos, and Power BI.",
+                embedding: [0.91, 0.11, 0.91, 0.81, 0.71]
+            },
+            {
+                text: "Mohamed's certifications include IBM Data Analyst Specialization (Coursera, Issued Oct. 2022), Six Sigma Green Belt Certified (MSI Certified, Issued Jan. 2023), Professional Scrum Master I (Scrum, Issued Feb. 2023), Machine Learning Specialization (DeepLearning.AI, Stanford University, Issued May 2024), and eCornell Data Analytics Certificate (Cornell, Issued Oct. 2024).",
+                embedding: [0.11, 0.12, 0.13, 0.14, 0.15]
+            }
+        ];
+
+        // Simplified embedding function (cosine similarity)
+        function cosineSimilarity(vecA, vecB) {
+            let dotProduct = 0;
+            let normA = 0;
+            let normB = 0;
+            for (let i = 0; i < vecA.length; i++) {
+                dotProduct += vecA[i] * vecB[i];
+                normA += vecA[i] * vecA[i];
+                normB += vecB[i] * vecB[i];
+            }
+            return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+        }
+
+        // Query embedding (simplified for demo)
+        function queryEmbedding(query) {
+            // In a real implementation, this would call an embedding model
+            // For demo purposes, we'll use a simple hashing approach
+            let hash = 0;
+            for (let i = 0; i < query.length; i++) {
+                hash = ((hash << 5) - hash) + query.charCodeAt(i);
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            
+            // Generate a pseudo-random but deterministic embedding vector based on the hash
+            const vector = [];
+            let hashStr = Math.abs(hash).toString();
+            while (hashStr.length < 10) hashStr += hashStr;
+            
+            for (let i = 0; i < 5; i++) {
+                const start = i * 2;
+                const num = parseInt(hashStr.substring(start, start + 2), 10);
+                vector.push(num / 100);
+            }
+            
+            return vector;
+        }
+
+        // Retrieve relevant context using similarity search
+        function retrieveRelevantContext(query) {
+            const queryVector = queryEmbedding(query.toLowerCase());
+            
+            // Calculate similarity scores
+            const scoredChunks = resumeData.map(chunk => {
+                return {
+                    text: chunk.text,
+                    score: cosineSimilarity(queryVector, chunk.embedding)
+                };
+            });
+            
+            // Sort by similarity and take top results
+            scoredChunks.sort((a, b) => b.score - a.score);
+            const topResults = scoredChunks.slice(0, 3);
+            
+            return topResults;
+        }
+
+        // Generate response based on retrieved context
+        function generateResponse(query, context) {
+            // A real implementation would use a proper LLM
+            // This simplified version will pattern match and use templates
+            
+            const lowerQuery = query.toLowerCase();
+            let response = "";
+            
+            // Extract context text for use in response
+            const contextText = context.map(item => item.text).join(' ');
+            
+            // Add "thinking" animation
+            const messagesDiv = document.getElementById('chatMessages');
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'message assistant-message thinking';
+            thinkingDiv.innerHTML = 'Thinking<span class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></span>';
+            messagesDiv.appendChild(thinkingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Different response templates based on query patterns
+            setTimeout(() => {
+                messagesDiv.removeChild(thinkingDiv);
+                
+                if (lowerQuery.includes('experience') || lowerQuery.includes('work') || lowerQuery.includes('job')) {
+                    if (lowerQuery.includes('ftc') || lowerQuery.includes('federal trade') || lowerQuery.includes('trade commission')) {
+                        response = "At the Federal Trade Commission, Mohamed works as a Data Analyst where he cleanses and visualizes diverse datasets, develops dynamic dashboards in Excel, and spearheads responses to Congressional Relations inquiries. He's known for automating tasks with Python scripts and conducted an analysis that saved $500,000 by optimizing parking space utilization.";
+                    } else if (lowerQuery.includes('va') || lowerQuery.includes('veteran') || lowerQuery.includes('affairs')) {
+                        response = "Mohamed worked at the Department of Veterans Affairs as a Sr. Statistician from 2024-2025, supporting the VHA GAO Training Area of Concern initiative. He applied statistical methods to evaluate training programs, collaborated with stakeholders to analyze data sets, and prepared visualizations to simplify complex findings for leadership.";
+                    } else if (lowerQuery.includes('dhs') || lowerQuery.includes('homeland')) {
+                        response = "At the Department of Homeland Security in 2022, Mohamed worked as a Data Analyst conducting in-depth data collection and analysis. He used Microsoft Excel to identify patterns and trends, reporting directly to the Chief of Staff and Federal Coordinator. He improved workflow productivity by 50% through automation.";
+                    } else if (lowerQuery.includes('xmas') || lowerQuery.includes('ecommerce') || lowerQuery.includes('e-commerce')) {
+                        response = "Mohamed owned Xmas Everything from 2019-2022, a 6-figure digital company he built while in college. He managed all operations, used marketing tools like Canva and Facebook Ads to generate profitable advertisements, and analyzed customer data to optimize marketing strategies and ROI.";
+                    } else {
+                        response = "Mohamed has over 5 years of professional experience in data analysis, quality assurance, and process automation. He currently works at the Federal Trade Commission as a Data Analyst. Previously, he worked at the Department of Veterans Affairs as a Sr. Statistician, the Department of Homeland Security as a Data Analyst, and owned Xmas Everything, a 6-figure e-commerce business.";
+                    }
+                } else if (lowerQuery.includes('education') || lowerQuery.includes('degree') || lowerQuery.includes('university') || lowerQuery.includes('college')) {
+                    response = "Mohamed is pursuing a Master of Science in Data Science and Analytics at Georgetown University, starting Fall 2025 with expected graduation in 2027. He holds a Bachelor of Science in Mechanical Engineering from Old Dominion University in Norfolk, VA.";
+                } else if (lowerQuery.includes('skill') || lowerQuery.includes('competenc') || lowerQuery.includes('able to')) {
+                    response = "Mohamed's core competencies include data visualization, data cleaning, statistical analysis, predictive modeling, process automation, workflow optimization, dashboard development, business management, and project development. His technical skills include Microsoft Office, IBM db2, SQL, NoSQL, Python, MATLAB, IBM Cognos, and Power BI.";
+                } else if (lowerQuery.includes('project') || lowerQuery.includes('portfolio')) {
+                    if (lowerQuery.includes('lunar') || lowerQuery.includes('reinforcement')) {
+                        response = "Mohamed's Lunar Lander with Reinforcement Learning project involved training an AI agent to control a lunar lander in a simulated environment. Using Python, OpenAI Gym, and TensorFlow, he demonstrated how an initially erratic agent could evolve through iterative learning to consistently achieve successful landings.";
+                    } else if (lowerQuery.includes('ecommerce') || lowerQuery.includes('e-commerce') || lowerQuery.includes('xmas')) {
+                        response = "In his E-commerce Data project, Mohamed revisited historical data from his Xmas Everything store using advanced analytics techniques. Using Python, Pandas, Matplotlib, and Geopandas, he uncovered trends and actionable insights that showcased his growth from basic analytics to sophisticated data processing.";
+                    } else if (lowerQuery.includes('llm') || lowerQuery.includes('rag') || lowerQuery.includes('language model')) {
+                        response = "Mohamed developed a Local LLM utilizing RAG (Retrieval Augmented Generation) to retrieve information about a custom ASI Methodology. Using Python, Ollama, Streamlit, Langchain, and Chromadb, he built an interactive interface that demonstrated the feasibility of deploying in-house LLMs with integrated RAG capabilities.";
+                    } else {
+                        response = "Mohamed has worked on several notable projects, including: 1) A Lunar Lander with Reinforcement Learning, where he trained an AI agent using Python and TensorFlow; 2) Revisiting E-commerce Data from his Xmas Everything store using advanced analytics; and 3) A Local LLM utilizing RAG to retrieve information about a custom methodology.";
+                    }
+                } else if (lowerQuery.includes('certification') || lowerQuery.includes('certified') || lowerQuery.includes('credential')) {
+                    response = "Mohamed holds several professional certifications, including: IBM Data Analyst Specialization (Coursera, 2022), Six Sigma Green Belt (MSI, 2023), Professional Scrum Master I (2023), Machine Learning Specialization (DeepLearning.AI/Stanford, 2024), and eCornell Data Analytics Certificate (Cornell, 2024).";
+                } else if (lowerQuery.includes('background') || lowerQuery.includes('about') || lowerQuery.includes('who is')) {
+                    response = "Mohamed Elhag is a data-driven professional with 5+ years of experience in data analysis, quality assurance, and process automation. He combines a mechanical engineering background with advanced data analytics expertise. Currently working at the Federal Trade Commission, he previously worked at the VA and DHS, and ran his own e-commerce business while in college. He's pursuing a Master's in Data Science at Georgetown University.";
+                } else {
+                    // For queries that don't match specific patterns, use a more generic response
+                    response = "Based on Mohamed's resume, " + generateGenericResponse(contextText, query);
+                }
+                
+                // Add the response to chat
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'message assistant-message';
+                responseDiv.innerHTML = response + '<div class="sources">Source: Mohamed\'s Resume</div>';
+                messagesDiv.appendChild(responseDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 1500);
+            
+            return "thinking..."; // Placeholder while thinking animation plays
+        }
+
+        // Simple pattern matching for generic responses
+        function generateGenericResponse(context, query) {
+            const lowerContext = context.toLowerCase();
+            const lowerQuery = query.toLowerCase();
+            
+            // Extract keywords from query
+            const keywords = lowerQuery.split(' ').filter(word => word.length > 3);
+            
+            // Find sentences that might contain answer
+            const sentences = context.split(/[.!?]+/);
+            const relevantSentences = sentences.filter(sentence => {
+                const lowerSentence = sentence.toLowerCase();
+                return keywords.some(keyword => lowerSentence.includes(keyword));
+            });
+            
+            if (relevantSentences.length > 0) {
+                return relevantSentences.slice(0, 2).join('. ') + '.';
+            } else {
+                return "I don't have specific information about that in my knowledge base. Mohamed Elhag is a data professional with experience in data analysis, visualization, and process automation across government agencies and private business.";
+            }
+        }
+
+        // Handle sending messages
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            if (!userInput.trim()) return;
+            
+            // Display user message
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = userInput;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Clear input
+            document.getElementById('userInput').value = '';
+            
+            // Retrieve context and generate response
+            const relevantContext = retrieveRelevantContext(userInput);
+            const response = generateResponse(userInput, relevantContext);
+        }
+
+        // Handle pressing Enter to send message
+        document.getElementById('userInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

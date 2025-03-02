@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xmas Everything Data Analysis | Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/project-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects" class="active">Projects</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <span class="theme-toggle-icon">☀️</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="project-hero" class="project-hero">
+            <div class="container">
+                <div class="project-navigation">
+                    <a href="index.html#projects" class="btn secondary">← Back to Projects</a>
+                </div>
+                <h1 class="project-title">Revisiting My E-commerce Data (Xmas Everything)</h1>
+                <div class="project-intro">
+                    <div class="project-visual">
+                        <div class="project-visual-container">
+                            <!-- Visualization from the project -->
+                            <div class="ecommerce-visualization">
+                                <img src="img/xmas-logo.png" alt="Xmas Everything Revenue Analysis" class="main-visual" />
+                                <!-- Replace with actual visualization later -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-summary">
+                        <p class="project-tagline">Reanalyzing e-commerce data with advanced techniques to uncover new insights and demonstrate growth in data science skills.</p>
+                        
+                        <div class="project-metadata">
+                            <div class="metadata-item">
+                                <strong>Project Type:</strong>
+                                <span>Data Analysis & Visualization</span>
+                            </div>
+                            <div class="metadata-item">
+                                <strong>Technologies:</strong>
+                                <div class="tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Pandas</span>
+                                    <span class="tag">Matplotlib</span>
+                                    <span class="tag">GeoPandas</span>
+                                </div>
+                            </div>
+                            <div class="metadata-item">
+                                <strong>Dataset:</strong>
+                                <span>E-commerce store transactional and traffic data</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/kiillmo/Georgetown/blob/main/Xmas_Everything_Data.ipynb" class="btn secondary">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-content" class="project-content">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="main-content">
+                        <div class="content-section">
+                            <h2>Project Overview</h2>
+                            <p>In this project, I revisited data from "Xmas Everything," an e-commerce store I previously owned and operated. While running the business, I relied primarily on basic analytics tools provided by platforms like Shopify to make decisions. Now, with a more sophisticated data science toolkit, I've reanalyzed this historical data to extract deeper insights and demonstrate how my analytical capabilities have evolved.</p>
+                            
+                            <p>The analysis focuses on several key business metrics: revenue trends over time, geographical distribution of orders, conversion rates compared to industry benchmarks, and payment method distribution. Each of these areas provides valuable business intelligence that would have been instrumental in making more informed strategic decisions.</p>
+                            
+                            <div class="personal-note">
+                                <h3>Personal Note</h3>
+                                <p>This project was both nostalgic and revelatory. Looking back at the data from my e-commerce venture with new skills and perspectives allowed me to see missed opportunities and validate some of the intuitive decisions I made at the time. It was a powerful demonstration of how my analytical skills have grown over the years and reminded me of the real-world impact data science can have on business outcomes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Revenue Analysis</h2>
+                            <p>The first part of this analysis focused on visualizing total revenue over time to understand sales trends and identify significant patterns in revenue generation.</p>
+                            
+                            <div class="methodology-step">
+                                <h3>Data Preparation</h3>
+                                <p>I loaded order data from a Shopify export file, ensuring the 'Paid at' column was in datetime format for accurate timeline plotting. After filtering out orders without payment dates, I used Pandas' groupby functionality to aggregate total revenue by date.</p>
+                                <div class="code-snippet">
+                                    <pre>
+df_orders = pd.read_csv('orders_export_1.csv')
+df_orders['Paid at'] = pd.to_datetime(df_orders['Paid at'])
+df_orders = df_orders.dropna(subset=['Paid at'])
+total_revenue = df_orders.groupby(df_orders['Paid at'].dt.date)['Total'].sum().reset_index()
+                                    </pre>
+                                </div>
+                            </div>
+                            
+                            <div class="methodology-step">
+                                <h3>Visualization Approach</h3>
+                                <p>I created a time series plot with an orange line representing revenue trends. The visualization includes formatted axes (dates and currency values) and deliberate design choices like removing unnecessary spines to focus attention on the data.</p>
+                            </div>
+                            
+                            <div class="visualization-result">
+                                <img src="img/xmas-revenue.png" alt="Revenue Over Time" />
+                                <p class="caption">Total Revenue Over Time - Note the significant increase followed by a decline</p>
+                            </div>
+                            
+                            <div class="insight-box">
+                                <h4>Key Insights:</h4>
+                                <ul>
+                                    <li>Revenue showed a clear upward trend initially, indicating successful marketing and product-market fit</li>
+                                    <li>The sudden decline in revenue coincided with PayPal freezing the store's assets, which significantly impacted operations</li>
+                                    <li>The total revenue during this period was substantial, demonstrating the business's potential</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Geographical Analysis</h2>
+                            <p>To optimize inventory management and improve delivery times, I visualized the geographical distribution of orders across the United States. This was particularly relevant as the store had distribution centers in New Jersey and San Francisco.</p>
+                            
+                            <div class="methodology-step">
+                                <h3>Data Preparation</h3>
+                                <p>This analysis required combining order data with geographical data. I used GeoPandas and a US state shapefile from the Census Bureau to create a geographical representation of order distribution. The initial visualization included all territories, but I later filtered to focus on the continental United States for better clarity.</p>
+                                <div class="code-snippet">
+                                    <pre>
+orders_by_state = df_orders['Shipping Province Name'].value_counts().reset_index()
+orders_by_state.columns = ['State', 'Orders']
+
+gdf_states = gpd.read_file('cb_2018_us_state_20m.shp')
+gdf_merged = gdf_states.merge(orders_by_state, left_on='NAME', right_on='State', how='left')
+gdf_merged['Orders'] = gdf_merged['Orders'].fillna(0)
+                                    </pre>
+                                </div>
+                            </div>
+                            
+                            <div class="methodology-step">
+                                <h3>Visualization Refinement</h3>
+                                <p>After creating an initial visualization, I made several refinements to improve clarity and focus:</p>
+                                <ul>
+                                    <li>Excluded territories and non-continental states (Alaska, Hawaii) to focus on the main market</li>
+                                    <li>Used a color gradient that effectively shows the distribution intensity</li>
+                                    <li>Added clear borders between states and appropriate legends</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="visualization-result">
+                                <img src="img/xmas-heatmap.png" alt="Orders by State Heatmap" />
+                                <p class="caption">Heatmap showing order distribution across the continental United States</p>
+                            </div>
+                            
+                            <div class="insight-box">
+                                <h4>Key Insights:</h4>
+                                <ul>
+                                    <li>Order concentration was significantly higher on the East Coast, explaining why the New Jersey inventory depleted faster</li>
+                                    <li>California showed strong order volume despite being on the opposite coast from the majority of customers</li>
+                                    <li>Several Midwestern states had surprisingly low order volumes, suggesting potential untapped markets</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Conversion Rate Analysis</h2>
+                            <p>Understanding how effectively the store converted visitors into customers was crucial for evaluating marketing performance. This analysis compared Xmas Everything's conversion rate against industry benchmarks.</p>
+                            
+                            <div class="methodology-step">
+                                <h3>Data Collection</h3>
+                                <p>I calculated the total conversion rate using website traffic data and order placement information. For benchmarking, I sourced industry data from Littledata's 2022 survey of 3000+ Shopify stores and from IPR Commerce's January 2024 data specific to the clothing industry.</p>
+                                <div class="code-snippet">
+                                    <pre>
+df_traffic = pd.read_csv('visits_2019-10-01_2019-12-31.csv')
+total_conversion_rate = round((df_traffic['total_orders_placed'].sum() / 
+                             df_traffic['total_sessions'].sum()) * 100, 2)
+                                    </pre>
+                                </div>
+                            </div>
+                            
+                            <div class="methodology-step">
+                                <h3>Visualization Approach</h3>
+                                <p>I used a horizontal bar graph to facilitate easy comparison between the store's performance and industry benchmarks. The visualization includes:</p>
+                                <ul>
+                                    <li>Color differentiation between benchmarks and the store's performance</li>
+                                    <li>Clear labeling of exact conversion rate percentages</li>
+                                    <li>Simplified design with unnecessary elements removed</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="visualization-result">
+                                <img src="img/xmas-conversion.png" alt="Conversion Rate Comparison" />
+                                <p class="caption">Conversion rate comparison between Xmas Everything and industry benchmarks</p>
+                            </div>
+                            
+                            <div class="insight-box">
+                                <h4>Key Insights:</h4>
+                                <ul>
+                                    <li>Xmas Everything's conversion rate outperformed both the general Shopify average and the clothing industry average</li>
+                                    <li>This suggests effective targeting, compelling product offerings, or a well-designed customer journey</li>
+                                    <li>The strong conversion rate indicated that traffic quality was high, even if overall volume could be improved</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Payment Methods Analysis</h2>
+                            <p>The final analysis examined the distribution of payment methods used by customers. This was particularly relevant given the impact of PayPal's asset freeze on the business's operations.</p>
+                            
+                            <div class="methodology-step">
+                                <h3>Data Preparation</h3>
+                                <p>I extracted payment method data from the orders dataset, focusing specifically on the two primary payment processors: PayPal Express Checkout and Shopify Payments.</p>
+                                <div class="code-snippet">
+                                    <pre>
+payment_methods = df_orders['Payment Method'].value_counts()[['PayPal Express Checkout', 'Shopify Payments']]
+                                    </pre>
+                                </div>
+                            </div>
+                            
+                            <div class="methodology-step">
+                                <h3>Visualization Approach</h3>
+                                <p>A pie chart was used to clearly show the proportion of orders processed through each payment method. I used distinct colors for each payment processor and included percentage labels for clarity.</p>
+                            </div>
+                            
+                            <div class="visualization-result">
+                                <img src="img/xmas-piechart.png" alt="Payment Methods Distribution" />
+                                <p class="caption">Distribution of orders by payment method</p>
+                            </div>
+                            
+                            <div class="insight-box">
+                                <h4>Key Insights:</h4>
+                                <ul>
+                                    <li>PayPal processed a significant portion of orders, explaining the substantial impact when these funds were frozen</li>
+                                    <li>The reliance on multiple payment processors demonstrated both a risk (vulnerability to freezes) and a benefit (diversification)</li>
+                                    <li>The distribution informed a key lesson: maintaining healthy relationships with payment processors is critical for e-commerce operations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Business Impact & Lessons Learned</h2>
+                            
+                            <div class="impact-item">
+                                <h3>Inventory Optimization</h3>
+                                <p>The geographical analysis clearly explained why the New Jersey warehouse depleted inventory faster than San Francisco. With this data, a more optimal inventory distribution could have been implemented, allocating approximately 70% to the East Coast facility and 30% to the West Coast.</p>
+                            </div>
+                            
+                            <div class="impact-item">
+                                <h3>Payment Processing Resilience</h3>
+                                <p>The payment method analysis highlighted a critical business vulnerability. Having a substantial portion of orders processed through PayPal created a single point of failure that significantly impacted operations when those funds were frozen. A contingency plan for payment processing would have been valuable.</p>
+                            </div>
+                            
+                            <div class="impact-item">
+                                <h3>Marketing Effectiveness</h3>
+                                <p>The conversion rate analysis confirmed that once visitors reached the site, they converted at an above-average rate. This suggests that marketing efforts were effectively targeting the right audience, and the website was successfully converting interest into sales.</p>
+                            </div>
+                            
+                            <div class="impact-item">
+                                <h3>Revenue Pattern Identification</h3>
+                                <p>The time series analysis revealed clear patterns in revenue that could have informed marketing spend timing and inventory preparation. The identification of these patterns would have enabled more strategic decision-making for future seasons.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Technical Growth & Reflection</h2>
+                            <p>This project demonstrates significant growth in my data analysis capabilities from when I initially ran the business:</p>
+                            
+                            <div class="growth-comparison">
+                                <div class="then-now">
+                                    <div class="then">
+                                        <h3>Then: Basic Analytics</h3>
+                                        <ul>
+                                            <li>Relied on platform-provided dashboards</li>
+                                            <li>Limited to predefined metrics</li>
+                                            <li>Minimal geographical insights</li>
+                                            <li>No comparative benchmarking</li>
+                                            <li>Reactive decision-making</li>
+                                        </ul>
+                                    </div>
+                                    <div class="now">
+                                        <h3>Now: Advanced Analytics</h3>
+                                        <ul>
+                                            <li>Custom Python scripts for targeted analysis</li>
+                                            <li>Data cleaning and transformation skills</li>
+                                            <li>Geographic data visualization with GeoPandas</li>
+                                            <li>Industry benchmarking and contextualization</li>
+                                            <li>Proactive, data-driven recommendations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p>This reanalysis represents more than just a technical exercise; it demonstrates how enhanced analytical capabilities translate directly to business value. The insights gleaned would have enabled more strategic decision-making, potentially avoiding some of the challenges faced and capitalizing further on the store's strengths.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2>Future Work</h2>
+                            <p>If continuing this analysis, several additional avenues would provide valuable insights:</p>
+                            
+                            <ul class="future-improvements">
+                                <li>
+                                    <strong>Customer Segmentation:</strong> Apply clustering techniques to identify different customer groups and their purchasing behaviors
+                                </li>
+                                <li>
+                                    <strong>Product Association Analysis:</strong> Implement market basket analysis to discover frequently co-purchased items
+                                </li>
+                                <li>
+                                    <strong>Predictive Modeling:</strong> Develop models to forecast seasonal demand and optimize inventory levels
+                                </li>
+                                <li>
+                                    <strong>Customer Lifetime Value:</strong> Calculate and analyze CLV to better understand the long-term value of customer acquisition
+                                </li>
+                                <li>
+                                    <strong>Marketing Channel Attribution:</strong> Multi-touch attribution modeling to understand which channels drove the most valuable conversions
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <aside class="sidebar">
+                        <div class="sidebar-section">
+                            <h3>Technical Skills Demonstrated</h3>
+                            <ul class="skills-list">
+                                <li>Data cleaning & preprocessing</li>
+                                <li>Time series visualization</li>
+                                <li>Geospatial data analysis</li>
+                                <li>Statistical comparison</li>
+                                <li>Business metric calculation</li>
+                                <li>Data-driven storytelling</li>
+                                <li>Python & library proficiency</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Data Sources</h3>
+                            <ul class="data-sources">
+                                <li>
+                                    <strong>Orders Data:</strong> Shopify export containing transaction details
+                                </li>
+                                <li>
+                                    <strong>Traffic Data:</strong> Website analytics for session and conversion tracking
+                                </li>
+                                <li>
+                                    <strong>Geographic Boundaries:</strong> US Census Bureau shapefiles
+                                </li>
+                                <li>
+                                    <strong>Industry Benchmarks:</strong> Littledata (2022) and IPR Commerce (2024)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Tools Used</h3>
+                            <div class="tools-used">
+                                <span class="tool">Python,</span>
+                                <span class="tool">Pandas,</span>
+                                <span class="tool">Matplotlib,</span>
+                                <span class="tool">GeoPandas,</span>
+                                <span class="tool">Jupyter Notebook,</span>
+                                <span class="tool">Git</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mohamed Elhag. All rights reserved.</p>
+            <p class="footer-tagline">Building technology with human values at the center.</p>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
