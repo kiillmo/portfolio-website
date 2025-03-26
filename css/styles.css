@@ -275,6 +275,21 @@ nav {
     font-weight: 500;
 }
 
+/* Special styling for selfie image */
+.about-image .image-placeholder {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.about-image img.image-placeholder {
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+}
+
 /* Projects Section */
 #projects {
     padding: 6rem 0;
