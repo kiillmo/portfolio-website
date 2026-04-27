@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Our Fallen Hero: The Pigeon</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html-435ba6093e6f0817aa7405139811e7b1.min.css" rel="stylesheet" append-hash="true" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<meta name="description" content="A scrollytelling data narrative on how American culture rewrote pigeons from wartime heroes into urban pests.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,750&amp;family=Newsreader:opsz,wght@6..72,400;6..72,550&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/dist/plot.umd.min.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/proj4@2.12.1/dist/proj4.js" defer=""></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "@mkkellogg/gaussian-splats-3d": "https://cdn.jsdelivr.net/npm/@mkkellogg/gaussian-splats-3d@0.4.7/build/gaussian-splats-3d.module.js"
+  }
+}
+</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+
+
+</header>
+
+
+<div class="scroll-progress" aria-hidden="true">
+  <span id="scroll-progress-fill"></span>
+</div>
+
+<nav class="story-nav" aria-label="Story sections">
+  <a href="#act1" data-nav-link="act1">Hook</a>
+  <a href="#act2" data-nav-link="act2">Cher Ami</a>
+  <a href="#act3" data-nav-link="act3">Data</a>
+  <a href="#act4" data-nav-link="act4">Pivot</a>
+  <a href="#act5" data-nav-link="act5">Cities</a>
+  <a href="#act6" data-nav-link="act6">Synthesis</a>
+  <a href="#sources" data-nav-link="sources">Sources</a>
+</nav>
+
+<main id="story" class="story-shell"><header id="title-block-header" class="quarto-title-block"><h1 class="title">Our Fallen Hero: The Pigeon</h1></header>
+  <section id="act1" class="act act-hook" data-act-label="Hook">
+    <div class="hook-media">
+      <img class="hook-cher" src="assets/images/cher-ami-image.jpg" alt="">
+      <img class="hook-statue" src="assets/images/IMG_0816.JPG" alt="">
+      <div class="hero-photo-credit">Photo by Mohamed Elhag<br>USS Maine National Monument, NYC<br>May 2025</div>
+    </div>
+    <div class="hook-copy">
+      <p class="act-kicker">1880 to 2000</p>
+      <h1>Our Fallen Hero: <br> The Pigeon</h1>
+      <p class="hook-lede">In 1918, Cher Ami was a national icon who saved a battalion.</p>
+      <p>Fast forward to 1966, and New York's Parks Commissioner was calling them "rats with wings." How did the world's most reliable messenger become our most famous pest?</p>
+      <p class="hook-question">The ultimate PR disaster, 100 years in the making.</p>
+    </div>
+  </section>
+
+  <section id="act2" class="act scrolly-act cher-act" data-act-label="Meet Cher Ami">
+    <div class="section-heading">
+      <img class="act-badge" src="assets/SVGs/icons/chapter-2-badge.svg" alt="">
+      <div>
+        <p class="act-kicker">Act 2</p>
+        <h2>Meet Cher Ami</h2>
+        <p>The Badass of the Skies.</p>
+      </div>
+    </div>
+
+    <div class="scrolly-grid">
+      <div class="pin-stage cher-stage" data-pin-stage="">
+        <div id="cher-splat" class="splat-viewport" aria-label="3D Gaussian splat viewer for Cher Ami">
+          <div class="splat-fallback">
+            <img src="assets/images/cher-ami-image.jpg" alt="Cher Ami taxidermy from the Smithsonian collection">
+          </div>
+          <div id="splat-status" class="splat-status">Loading Cher Ami</div>
+        </div>
+        <img class="stage-medal" src="assets/SVGs/icons/croix-de-guerre-medal.svg" alt="">
+        <img class="stage-icon telegram-icon" src="assets/SVGs/icons/telegram-envelope.svg" alt="">
+      </div>
+
+      <div class="story-steps">
+        <article class="story-step" data-cher-pose="0">
+          <p class="step-label">Argonne Forest, 1918</p>
+          <h3>A bird enters the chain of command.</h3>
+          <p>On October 4, 1918, Major Charles Whittlesey's Lost Battalion of the 77th Division was trapped in the Argonne Forest. The unit was under German fire and, worse, under friendly American artillery.</p>
+        </article>
+        <article class="story-step" data-cher-pose="1">
+          <p class="step-label">The third message</p>
+          <h3>Two pigeons were shot down. Cher Ami was next.</h3>
+          <p>The message was short and desperate: the barrage was falling on American soldiers. Cher Ami launched with the capsule attached, a living courier inside a communications system built for moments when wires and radios failed.</p>
+        </article>
+        <article class="story-step" data-cher-pose="2">
+          <p class="step-label">The wound</p>
+          <h3>Shot through the breast, still flying.</h3>
+          <p>The bird was hit in the chest, blinded in one eye, and badly injured in the leg. The story is famous because the flight did not stop. Cher Ami covered roughly 25 miles in about 25 minutes and the shelling ceased.</p>
+        </article>
+        <article class="story-step" data-cher-pose="3">
+          <p class="step-label">The medal</p>
+          <h3>A military animal became a decorated animal.</h3>
+          <p>France awarded Cher Ami the Croix de Guerre. General John Pershing helped make the bird a symbol of wartime service. More than a century later, in November 2019, Cher Ami became the second recipient of the Animals in War &amp; Peace Medal of Bravery, awarded posthumously at a ceremony on Capitol Hill in Washington, D.C.</p>
+        </article>
+        <article class="story-step" data-cher-pose="4">
+          <p class="step-label">The artifact</p>
+          <h3>The body on screen is the archive.</h3>
+          <p>Smithsonian taxidermists preserved Cher Ami after the war. The model beside this text is built from the taxidermied body on display at the National Museum of American History.</p>
+        </article>
+        <article class="story-step" data-cher-pose="5">
+          <p class="step-label">One of many</p>
+          <h3>Cher Ami was exemplary, not unique.</h3>
+          <p>The US Army Signal Corps Pigeon Service used hundreds of birds in World War I and kept the service active until 1957. Cher Ami gives the story a face; the institution explains why newspapers had a heroic vocabulary ready to use.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <img src="assets/SVGs/icons/seperator-2.svg" alt="">
+  </div>
+
+  <section id="act3" class="act scrolly-act" data-act-label="Heroic Data">
+    <div class="section-heading">
+      <img class="act-badge" src="assets/SVGs/icons/chapter-3-badge.svg" alt="">
+      <div>
+        <p class="act-kicker">Act 3</p>
+        <h2>The heroic era in the data</h2>
+        <p>I measured words appearing near "pigeon" in the New York Times corpus, grouped those words into cultural frames, and tracked the rate of each frame per article over time.</p>
+      </div>
+    </div>
+
+    <div class="scrolly-grid data-grid">
+      <div class="pin-stage chart-stage" data-pin-stage="">
+        <img class="pigeon-accent chart-perch" src="assets/SVGs/pigeons/pigeon-looking-up.svg" alt="">
+        <div class="chart-toolbar">
+          <p class="chart-eyebrow">NYT only, 1880-2000</p>
+          <h3>Framed language around "pigeon"</h3>
+        </div>
+        <div id="act3-chart" class="plot-box" role="img" aria-label="Annotated line chart of pigeon framing rates in the New York Times"></div>
+        <div class="chart-support">
+          <div>
+            <p class="mini-heading">Top collocates in focus</p>
+            <div id="act3-terms" class="term-list"></div>
+          </div>
+          <figure id="act3-clips" class="clip-pair" aria-live="polite"></figure>
+        </div>
+      </div>
+
+      <div class="story-steps">
+        <article class="story-step" data-act3-step="0">
+          <p class="step-label">The measured frame</p>
+          <h3>First, isolate the heroic line.</h3>
+          <p>Words like "carrier," "messenger," "service," "duty," and "saved" become a measurable vocabulary around pigeons. The line rises when war makes the bird useful to human survival.</p>
+        </article>
+        <article class="story-step" data-act3-step="1">
+          <p class="step-label">Wartime peaks</p>
+          <h3>War drives the heroic vocabulary.</h3>
+          <p>The chart marks World War I and World War II separately. In this processed NYT file, the WWII spike is the larger one; the Cher Ami-era peak still anchors the first heroic surge.</p>
+        </article>
+        <article class="story-step" data-act3-step="2">
+          <p class="step-label">Targets before heroes</p>
+          <h3>The 1880s were not innocent.</h3>
+          <p>Sport and hunting terms dominate early coverage. Live-pigeon trap shooting was fashionable, and the passenger pigeon was being pushed toward extinction. Pigeons were targets before they were heroes.</p>
+        </article>
+        <article class="story-step" data-act3-step="3">
+          <p class="step-label">A new vocabulary appears</p>
+          <h3>The nuisance line starts low.</h3>
+          <p>The pest vocabulary does not arrive fully formed. It builds slowly, then becomes easier for newspapers to reach for after the war-era meanings recede.</p>
+        </article>
+        <article class="story-step" data-act3-step="4">
+          <p class="step-label">Attention collapse</p>
+          <h3>The bird becomes background.</h3>
+          <p>By the urban-pest era, total framed language is far lower than wartime levels. Newspapers still mentioned pigeons, but the old symbolic vocabulary had thinned to a whisper.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <img src="assets/SVGs/icons/seperator-3.svg" alt="">
+  </div>
+
+  <section id="act4" class="act scrolly-act pivot-act" data-act-label="The Pivot">
+    <div class="section-heading">
+      <img class="act-badge" src="assets/SVGs/icons/chapter-4-badge.svg" alt="">
+      <div>
+        <p class="act-kicker">Act 4</p>
+        <h2>The pivot was gradual, then loud</h2>
+        <p>Hoving's "rats with wings" line matters because it gave a name to a trend already visible in the language.</p>
+      </div>
+    </div>
+
+    <div class="scrolly-grid data-grid">
+      <div class="pin-stage chart-stage pivot-stage" data-pin-stage="">
+        <img class="pigeon-accent pivot-bird" src="assets/SVGs/pigeons/pigeon-looking-right.svg" alt="">
+        <div class="chart-toolbar">
+          <p class="chart-eyebrow">Heroic vs. nuisance frames</p>
+          <h3 id="pivot-title">Cher Ami era</h3>
+        </div>
+        <div id="act4-chart" class="plot-box" role="img" aria-label="Annotated line chart comparing heroic and nuisance framing"></div>
+        <div class="word-clouds" aria-label="Vocabulary comparison across eras">
+          <div class="word-cloud" data-cloud="wwii">
+            <p class="mini-heading">WWII era</p>
+            <div></div>
+          </div>
+          <div class="word-cloud" data-cloud="hoving">
+            <p class="mini-heading">Hoving era</p>
+            <div></div>
+          </div>
+          <div class="word-cloud" data-cloud="wave">
+            <p class="mini-heading">1990s wave</p>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-steps">
+        <article class="story-step" data-act4-step="0">
+          <p class="step-label">1918-1919</p>
+          <h3>Cher Ami era.</h3>
+          <p>The heroic line belongs to a world where the pigeon could be written as an ally, courier, and servant of the state.</p>
+        </article>
+        <article class="story-step" data-act4-step="1">
+          <p class="step-label">Late 1950s</p>
+          <h3>The language flips.</h3>
+          <p>The crossover is not a clean switch thrown on one day. It is a zone where heroic language loses its old force and nuisance language becomes available.</p>
+        </article>
+        <article class="story-step" data-act4-step="2">
+          <p class="step-label">1963-1964</p>
+          <h3>The panic forms.</h3>
+          <p>Disease, droppings, death, nuisance, and control become part of the public vocabulary before Hoving becomes parks commissioner.</p>
+        </article>
+        <article class="story-step" data-act4-step="3">
+          <p class="step-label">1966</p>
+          <h3>Hoving amplifies it.</h3>
+          <p>The phrase "rats with wings" is memorable because it compresses a cultural shift into four words. The data suggests he amplified a current, not created it.</p>
+        </article>
+        <article class="story-step" data-act4-step="4">
+          <p class="step-label">1990s</p>
+          <h3>A second wave rolls through.</h3>
+          <p>The pest frame keeps returning. By then, the heroic vocabulary is mostly historical residue: something invoked in memory, not in everyday urban life.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <img src="assets/SVGs/icons/seperator-4.svg" alt="">
+  </div>
+
+  <section id="act5" class="act scrolly-act city-act" data-act-label="The Modern Pigeon">
+    <div class="section-heading">
+      <img class="act-badge" src="assets/SVGs/icons/chapter-5-badge.svg" alt="">
+      <div>
+        <p class="act-kicker">Act 5</p>
+        <h2>The modern pigeon lives in the built city</h2>
+        <p>The map view compares pigeon density with the built environment in Washington, DC and New York City. Hover a tract in either city to highlight the same pigeon-density quintile in both maps.</p>
+      </div>
+    </div>
+
+    <div class="scrolly-grid city-grid">
+      <div class="pin-stage map-stage" data-pin-stage="">
+        <img class="pigeon-accent map-bird" src="assets/SVGs/pigeons/pigeon-scurry.svg" alt="">
+        <div class="map-layout">
+          <section>
+            <div class="map-heading">
+              <h3>Washington, DC</h3>
+              <span>height-capped city</span>
+            </div>
+            <div id="dc-map" class="leaflet-shell" aria-label="Washington DC tract choropleth"></div>
+          </section>
+          <section>
+            <div class="map-heading">
+              <h3>New York City</h3>
+              <span>vertical city</span>
+            </div>
+            <div id="nyc-map" class="leaflet-shell" aria-label="New York City tract choropleth"></div>
+          </section>
+          <aside id="tract-detail" class="tract-detail">
+            <p class="mini-heading">Hovered density band</p>
+            <strong>Move across either map</strong>
+            <span>Matching quintiles will light up in both cities.</span>
+          </aside>
+        </div>
+        <div class="quintile-legend" aria-hidden="true">
+          <span>lower pigeon density</span>
+          <div id="map-legend-swatches"></div>
+          <span>higher pigeon density</span>
+        </div>
+        <div id="city-scatter" class="plot-box scatter-box" role="img" aria-label="Scatterplot comparing building density and pigeon density"></div>
+      </div>
+
+      <div class="story-steps city-copy">
+        <article class="story-step" data-city-step="0">
+          <p class="step-label">Linked view</p>
+          <h3>Hover one tract, compare both cities.</h3>
+          <p>The maps use the same pigeon-density quintile scale. A tract in the top band in DC highlights the top band in New York too.</p>
+        </article>
+        <article class="story-step" data-city-step="1">
+          <p class="step-label">Synthetic cliff hypothesis</p>
+          <h3>New York supplies cliffs.</h3>
+          <p>Tall buildings mimic the ledges and vertical faces rock pigeons evolved to use. If that hypothesis is right, dense vertical form should align with pigeon density.</p>
+        </article>
+        <article class="story-step" data-city-step="2">
+          <p class="step-label">DC caveat</p>
+          <h3>A flatter skyline produces a flatter relationship.</h3>
+          <p>DC has dense blocks, but the height cap changes the available vertical habitat. The relationship should be less dramatic than in Manhattan.</p>
+        </article>
+        <article class="story-step" data-city-step="3">
+          <p class="step-label">Citizen science caveat</p>
+          <h3>These birds are also where observers are.</h3>
+          <p>eBird records reflect birder behavior as much as pigeon behavior. This is evidence about urban sightings, not a perfect census of birds.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <img src="assets/SVGs/icons/seperator-5.svg" alt="">
+  </div>
+
+  <section id="act6" class="act synthesis-act" data-act-label="Synthesis">
+    <div class="section-heading">
+      <img class="act-badge" src="assets/SVGs/icons/chapter-6-badge.svg" alt="">
+      <div>
+        <p class="act-kicker">Act 6</p>
+        <h2>Same bird. Different stories.</h2>
+        <p>Across the century, the story moves through wartime institutions, urban design, public-health language, and finally a fading attention span.</p>
+      </div>
+    </div>
+
+    <figure class="infographic" aria-label="Timeline infographic from 1880 to 2000">
+      <img class="pigeon-accent synth-bird" src="assets/SVGs/pigeons/pigeon-sitting.svg" alt="">
+      <svg viewbox="0 0 1280 760" role="img">
+        <title>Our Fallen Hero: The Pigeon timeline</title>
+        <desc>A horizontal timeline with cultural moments above and data moments below from 1880 to 2000.</desc>
+        <line class="timeline-axis" x1="110" y1="370" x2="1170" y2="370"></line>
+        <g class="timeline-years">
+          <text x="110" y="410">1880</text>
+          <text x="375" y="410">1910</text>
+          <text x="640" y="410">1940</text>
+          <text x="905" y="410">1970</text>
+          <text x="1170" y="410">2000</text>
+        </g>
+
+        <g class="timeline-row cultural">
+          <text class="row-label" x="110" y="88">cultural moments</text>
+          <g transform="translate(210 235)">
+            <circle r="11"></circle>
+            <line y1="11" y2="124"></line>
+            <text y="-44">Live-pigeon shooting era</text>
+            <text class="small" y="-20">sport, targets, passenger pigeon decline</text>
+          </g>
+          <g transform="translate(430 160)">
+            <circle r="11"></circle>
+            <line y1="11" y2="199"></line>
+            <text y="-44">Cher Ami, 1918</text>
+            <text class="small" y="-20">the Lost Battalion message</text>
+          </g>
+          <g transform="translate(865 190)">
+            <circle r="11"></circle>
+            <line y1="11" y2="169"></line>
+            <text y="-44">Hoving, 1966</text>
+            <text class="small" y="-20">"rats with wings" shorthand</text>
+          </g>
+          <g transform="translate(1060 255)">
+            <circle r="11"></circle>
+            <line y1="11" y2="104"></line>
+            <text y="-44">Pop-culture pest, 1980</text>
+            <text class="small" y="-20">the phrase circulates</text>
+          </g>
+        </g>
+
+        <g class="timeline-row data">
+          <text class="row-label" x="110" y="470">data moments</text>
+          <g transform="translate(190 505)">
+            <circle r="11"></circle>
+            <line y1="-124" y2="-11"></line>
+            <text y="48">Sport/hunting peak</text>
+            <text class="small" y="70">1880s NYT vocabulary</text>
+          </g>
+          <g transform="translate(640 545)">
+            <circle r="11"></circle>
+            <line y1="-164" y2="-11"></line>
+            <text y="46">Heroic rate peak</text>
+            <text class="small" y="70">wartime vocabulary spikes</text>
+          </g>
+          <g transform="translate(835 635)">
+            <circle r="11"></circle>
+            <line y1="-254" y2="-11"></line>
+            <text y="42">Nuisance crossover</text>
+            <text class="small" y="64">late 1950s language flip</text>
+          </g>
+          <g transform="translate(1130 520)">
+            <circle r="11"></circle>
+            <line y1="-139" y2="-11"></line>
+            <text y="46">Attention collapse</text>
+            <text class="small" y="70">framed language thins by 2000</text>
+          </g>
+        </g>
+
+        <text class="closing-line" x="640" y="728">Same bird. Same century. Different stories.</text>
+      </svg>
+    </figure>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <img src="assets/SVGs/icons/seperator-6.svg" alt="">
+  </div>
+
+  <section id="sources" class="act methods-act" data-act-label="Sources &amp; Methods">
+    <div class="section-heading">
+      <div>
+        <p class="act-kicker">Appendix</p>
+        <h2>Sources &amp; Methods</h2>
+        <p>Where the imagery, data, tools, and analytical choices behind this piece came from.</p>
+      </div>
+    </div>
+
+    <div class="methods-panel">
+      <section class="methods-block">
+        <h3>Newspaper Imagery</h3>
+        <p>The historical newspaper screenshots throughout this piece come from two open archives.</p>
+
+        <h4>Library of Congress - Chronicling America</h4>
+        <ul>
+          <li><cite>The Washington Times</cite>, "Pigeon Hero" feature. November 5, 1937, page 8. <a href="https://www.loc.gov/resource/sn84026749/1937-11-05/ed-1/?sp=8&amp;q=pigeon+hero">loc.gov/resource/sn84026749/1937-11-05</a></li>
+          <li><cite>Evening Star</cite> (Washington, D.C.), May 5, 1959, page 21. <a href="https://www.loc.gov/resource/sn83045462/1959-05-05/ed-1/?sp=21&amp;q=pigeon+%22manor+park%22">loc.gov/resource/sn83045462/1959-05-05</a></li>
+        </ul>
+
+        <h4>The New York Times TimesMachine Archive</h4>
+        <ul>
+          <li>"Wounded Hero Birds." Photo, U.S. Army Signal Corps. May 25, 1919, page 80. <a href="https://timesmachine.nytimes.com/timesmachine/1919/05/25/96310492.html?pageNumber=80">TimesMachine link</a></li>
+          <li>"Carrier Pigeons Real Heroes of Air." February 11, 1923, page 154. <a href="https://timesmachine.nytimes.com/timesmachine/1923/02/11/105902918.html?pageNumber=154">TimesMachine link</a></li>
+          <li>John C. Devlin, "Pigeons Blamed in 2 City Deaths." October 1, 1963, page 41. <a href="https://timesmachine.nytimes.com/timesmachine/1963/10/01/89962051.html?pageNumber=41">TimesMachine link</a></li>
+          <li>"Hoving Calls a Meeting to Plan For Restoration of Bryant Park." June 22, 1966, pages 49 and 59. <a href="https://timesmachine.nytimes.com/timesmachine/1966/06/22/82811668.html?pageNumber=49">TimesMachine link</a></li>
+        </ul>
+      </section>
+
+      <section class="methods-block">
+        <h3>Cher Ami Imagery</h3>
+        <p>The placeholder photograph of Cher Ami's taxidermied body comes from the Smithsonian National Museum of American History's online collection: <a href="https://www.si.edu/object/cher-ami%3Anmah_425415">si.edu/object/cher-ami</a>.</p>
+        <p>I captured the 3D Gaussian Splat of Cher Ami by recording a walk-around video on my iPhone of the taxidermy on display at the Smithsonian National Museum of American History. I processed the video into a <code>.ply</code> Gaussian splat using Kiri Engine, then rendered it in the browser with Three.js and <code>@mkkellogg/gaussian-splats-3d</code>.</p>
+      </section>
+
+      <section class="methods-block">
+        <h3>Data Sources</h3>
+
+        <h4>Linguistic Corpora</h4>
+        <ul>
+          <li><cite>Chronicling America</cite> from the Library of Congress for historical U.S. newspaper coverage: <a href="https://chroniclingamerica.loc.gov/">chroniclingamerica.loc.gov</a></li>
+          <li><cite>The New York Times</cite> Article Search API for NYT coverage from 1880 to 2000: <a href="https://developer.nytimes.com/">developer.nytimes.com</a></li>
+        </ul>
+
+        <h4>Pigeon Observations</h4>
+        <ul>
+          <li><cite>eBird</cite>, Cornell Lab of Ornithology, for recent rock pigeon (<i>Columba livia</i>) observations near each city centroid: <a href="https://ebird.org/data">ebird.org/data</a></li>
+          <li><cite>GBIF</cite>, the Global Biodiversity Information Facility, for historical <i>Columba livia</i> occurrence records: <a href="https://www.gbif.org/">gbif.org</a></li>
+        </ul>
+
+        <h4>Building Footprints and Census Tracts</h4>
+        <ul>
+          <li><cite>Open Data DC</cite> for District of Columbia building footprints and census tract boundaries: <a href="https://opendata.dc.gov/">opendata.dc.gov</a></li>
+          <li><cite>NYC Open Data</cite> for Building Footprints (<code>5zhs-2jue</code>) and 2020 Census Tracts (<code>63ge-mke6</code>): <a href="https://opendata.cityofnewyork.us/">opendata.cityofnewyork.us</a></li>
+        </ul>
+      </section>
+
+      <section class="methods-block">
+        <h3>Technologies</h3>
+        <div class="tech-grid">
+          <a href="https://quarto.org/">Quarto</a>
+          <span>site framework and static build system</span>
+          <span>HTML / CSS / JavaScript</span>
+          <span>page structure, styling, and custom interactions</span>
+          <a href="https://threejs.org/">Three.js</a>
+          <span>WebGL renderer for the Cher Ami 3D scene</span>
+          <a href="https://github.com/mkkellogg/GaussianSplats3D">@mkkellogg/gaussian-splats-3d</a>
+          <span>loading and rendering the Cher Ami <code>.ply</code> Gaussian splat</span>
+          <a href="https://gsap.com/">GSAP + ScrollTrigger</a>
+          <span>pinned scrollytelling sections and scroll-driven progress</span>
+          <a href="https://observablehq.com/plot/">Observable Plot</a>
+          <span>newspaper framing charts and the comparative scatterplot</span>
+          <a href="https://d3js.org/">D3</a>
+          <span>CSV loading and chart/data transforms</span>
+          <a href="https://leafletjs.com/">Leaflet</a>
+          <span>interactive DC and NYC choropleth maps</span>
+          <a href="https://github.com/proj4js/proj4js">proj4</a>
+          <span>projected coordinate handling for tract geometry</span>
+          <a href="https://www.kiriengine.app/">Kiri Engine</a>
+          <span>iPhone-video-to-Gaussian-splat processing</span>
+        </div>
+      </section>
+
+      <section class="methods-block">
+        <h3>AI Usage</h3>
+        <p>AI tools were used as aids for scaffolding, visualization design, coding support, debugging, and asset generation. The final analytical decisions, interpretation, and editorial choices are my own.</p>
+        <p><strong>OpenAI Images</strong> was used to generate reference icon imagery, which I then traced and refined into final SVG assets in Adobe Illustrator. The finished icons on this site are my own SVG work; the AI-generated images served as visual references during the design process.</p>
+        <p><strong>Anthropic's Claude</strong> and <strong>OpenAI's Codex</strong> helped scaffold the site's technical structure, wire Quarto to the JavaScript libraries, troubleshoot data and rendering issues, and explain unfamiliar techniques such as browser-based Gaussian Splat rendering and scroll-driven animation with GSAP ScrollTrigger.</p>
+        <p>I also used AI tools as a sounding board during data analysis to debug API endpoints, troubleshoot data-pull failures, and discuss methodological trade-offs. The final interpretation of the data is my own.</p>
+      </section>
+
+      <section class="methods-block methods-wide">
+        <h3>Methodology</h3>
+        <p>The linguistic story is built on weighted collocation analysis. For each newspaper item containing the word "pigeon," I counted how often words from five hand-curated category lists - heroic / utility, sport / hobby, culinary, hunting, and nuisance / disease - appeared within a 15-token window of "pigeon." Each match was weighted by its distance from the target word, so adjacent words counted close to 1.0 and words 15 tokens away counted about 0.06. The category lists were built from frequent collocates of "pigeon" in the collected corpus and then manually grouped into themes; OCR artifacts and neutral filler words were excluded.</p>
+        <p>Per-article scores were normalized by article count when comparing across years, producing the "frame hits per article" metric used in the charts. The final public-facing time-series charts use the NYT rows from <code>annual_collocation_tone_by_source.csv</code> for the 1880-2000 arc, plus <code>nyt_decade_collocations.csv</code> for the vocabulary callouts. Chronicling America informed the broader archive, source selection, and historical context, but its per-article rates are not mixed with NYT rates on the same chart.</p>
+        <p>This separation matters because the corpora expose different kinds of text. Chronicling America records are longer and noisier OCR/page records, while the NYT API returns shorter metadata fields such as headline, abstract, snippet, and lead paragraph. The same collocation method can be run on both, but the final visual comparisons avoid treating the two text lengths as directly interchangeable.</p>
+        <p>The geospatial analysis aggregates eBird and GBIF <i>Columba livia</i> observations to the census-tract level for DC and NYC, computing pigeons per square kilometer and buildings per square kilometer for each tract. DC tract geometry is handled in EPSG:26985; NYC tract geometry is handled in EPSG:2263 and converted to square kilometers. NYC's building-density measure counts buildings 100 feet or taller from the NYC Open Data building-footprints pull; DC's measure counts all building footprints, matching the city's lower-rise built environment.</p>
+        <p>A note on the eBird and GBIF data: citizen-science observations reflect where observers go, not strictly where pigeons are. The signal is useful for comparing observed urban pigeon density, but it is biased toward parks, tourist areas, and well-traveled observation routes.</p>
+      </section>
+
+      <section class="methods-block acknowledgment-block">
+        <h3>Acknowledgments</h3>
+        <p>This project was developed for DSAN 5200 in Spring 2026. I would also like to acknowledge Professor James Hickman. His course materials are available at <a href="https://jfh.georgetown.domains/centralized-lecture-content/">jfh.georgetown.domains/centralized-lecture-content</a> (Student Access Only).</p>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="story-footer">
+  <span>DSAN 5200 final project</span>
+  <span>Quarto + GSAP + Observable Plot + Leaflet + Three.js</span>
+</footer>
+
+<script type="module" src="scripts/app.js"></script>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+
+
+
+
+</body></html>
