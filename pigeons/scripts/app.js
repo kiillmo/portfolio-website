@@ -202,7 +202,7 @@ async function boot() {
     setupScrollProgress();
     setupNavObserver();
     setupStepObserver();
-    setupPins();
+    setupScrollScenes();
     setupHashCorrection();
     initLegend();
     setupLazySections();
@@ -221,7 +221,7 @@ async function boot() {
 }
 
 function setupLazySections() {
-  runWhenNear("#act2", () => requestCherAmi(), "1200px 0px");
+  runWhenNear("#act2", () => requestCherAmiSoon(), "0px 0px -18% 0px");
   runWhenNear("#act3", () => requestTextVisuals(), "1100px 0px");
   runWhenNear("#act4", () => requestTextVisuals(), "1100px 0px");
   runWhenNear("#act5", () => requestMaps(), "1200px 0px");
@@ -256,6 +256,14 @@ function requestCherAmi() {
   return state.cherPromise;
 }
 
+function requestCherAmiSoon() {
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(() => requestCherAmi(), { timeout: 900 });
+  } else {
+    window.setTimeout(() => requestCherAmi(), 160);
+  }
+}
+
 function requestTextVisuals() {
   if (state.textVisualsReady) return Promise.resolve(state.textData);
   if (!state.textDataPromise) {
@@ -267,7 +275,6 @@ function requestTextVisuals() {
       initAct3(textData);
       initAct4(textData);
       state.textVisualsReady = true;
-      ScrollTrigger.refresh();
     }
     return textData;
   }).catch((error) => {
@@ -286,7 +293,6 @@ function requestMaps() {
     if (!state.mapReady) {
       initAct5(mapData);
       state.mapReady = true;
-      ScrollTrigger.refresh();
     }
     return mapData;
   }).catch((error) => {
@@ -392,17 +398,6 @@ function setupNavObserver() {
     const active = links.get(id);
     if (active) active.classList.add("is-active");
   };
-  document.querySelectorAll(".act").forEach((section) => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top center",
-      end: "bottom center",
-      onToggle: (self) => {
-        if (!self.isActive) return;
-        setActive(section.id);
-      }
-    });
-  });
   const updateFromViewport = () => {
     const probe = window.scrollY + window.innerHeight * 0.42;
     const current = sections
@@ -411,27 +406,23 @@ function setupNavObserver() {
       .find((section) => section.offsetTop <= probe);
     if (current) setActive(current.id);
   };
-  window.addEventListener("scroll", debounce(updateFromViewport, 80), { passive: true });
+  let scheduled = false;
+  const scheduleUpdate = () => {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(() => {
+      scheduled = false;
+      updateFromViewport();
+    });
+  };
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
   updateFromViewport();
 }
 
-function setupPins() {
+function setupScrollScenes() {
   const matcher = gsap.matchMedia();
   matcher.add("(min-width: 901px)", () => {
     const triggers = [];
-    document.querySelectorAll("[data-pin-stage]").forEach((stage) => {
-      const section = stage.closest(".scrolly-act");
-      const grid = stage.closest(".scrolly-grid") || section;
-      triggers.push(ScrollTrigger.create({
-        trigger: grid,
-        start: "top 84px",
-        end: "bottom bottom",
-        pin: stage,
-        pinSpacing: false,
-        anticipatePin: 1,
-        invalidateOnRefresh: true
-      }));
-    });
     triggers.push(ScrollTrigger.create({
       trigger: "#act2 .scrolly-grid",
       start: "top 84px",
@@ -494,12 +485,18 @@ function activateStep(step) {
   step.classList.add("is-active");
 
   if (step.dataset.act3Step !== undefined) {
-    state.act3Step = Number(step.dataset.act3Step);
-    renderAct3();
+    const nextStep = Number(step.dataset.act3Step);
+    if (state.act3Step !== nextStep) {
+      state.act3Step = nextStep;
+      renderAct3();
+    }
   }
   if (step.dataset.act4Step !== undefined) {
-    state.act4Step = Number(step.dataset.act4Step);
-    renderAct4();
+    const nextStep = Number(step.dataset.act4Step);
+    if (state.act4Step !== nextStep) {
+      state.act4Step = nextStep;
+      renderAct4();
+    }
   }
 }
 
@@ -519,7 +516,7 @@ async function initCherAmi() {
       alpha: true,
       powerPreference: "high-performance"
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.setPixelRatio(1);
     root.appendChild(renderer.domElement);
 
     const camera = new THREE.PerspectiveCamera(
@@ -547,6 +544,8 @@ async function initCherAmi() {
     });
 
     const poses = CHER_AMI_CAMERA.poses;
+    let rafId = null;
+    let shouldRender = false;
 
     const controller = {
       progress: 0,
@@ -563,6 +562,34 @@ async function initCherAmi() {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height, false);
+    };
+
+    const renderOnce = () => {
+      viewer.update();
+      viewer.render();
+    };
+
+    const renderLoop = () => {
+      if (!shouldRender) {
+        rafId = null;
+        return;
+      }
+      renderOnce();
+      rafId = window.requestAnimationFrame(renderLoop);
+    };
+
+    const startRendering = () => {
+      if (shouldRender) return;
+      shouldRender = true;
+      if (!rafId) rafId = window.requestAnimationFrame(renderLoop);
+    };
+
+    const stopRendering = () => {
+      shouldRender = false;
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
     };
 
     const updateCameraFromProgress = () => {
@@ -587,7 +614,7 @@ async function initCherAmi() {
     status.textContent = "Loading Cher Ami model";
     await viewer.addSplatScene(PATHS.splat, {
       splatAlphaRemovalThreshold: CHER_AMI_CAMERA.alphaRemovalThreshold,
-      showLoadingUI: true,
+      showLoadingUI: false,
       progressiveLoad: false,
       position: CHER_AMI_CAMERA.scenePosition,
       rotation: CHER_AMI_CAMERA.sceneRotation,
@@ -596,12 +623,17 @@ async function initCherAmi() {
     root.classList.add("is-live");
     status.textContent = "Cher Ami splat loaded";
 
-    const animate = () => {
-      viewer.update();
-      viewer.render();
-      window.requestAnimationFrame(animate);
-    };
-    animate();
+    const renderObserver = new IntersectionObserver((entries) => {
+      const isNearViewport = entries.some((entry) => entry.isIntersecting);
+      if (isNearViewport) {
+        resize();
+        updateCameraFromProgress();
+        startRendering();
+      } else {
+        stopRendering();
+      }
+    }, { rootMargin: "360px 0px", threshold: 0 });
+    renderObserver.observe(root);
   } catch (error) {
     console.error(error);
     status.textContent = "Splat fallback image shown";

@@ -128,7 +128,7 @@ canvas {
 }
 
 .story-shell {
-  overflow: clip;
+  overflow: visible;
 }
 
 .act {
@@ -369,6 +369,7 @@ h3 {
   background: var(--stage);
   box-shadow: var(--shadow);
   overflow: hidden;
+  isolation: isolate;
 }
 
 .story-steps {
@@ -396,6 +397,15 @@ h3 {
   font-size: 19px;
 }
 
+@media (min-width: 901px) {
+  .pin-stage {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    z-index: 20;
+  }
+}
+
 .cher-stage {
   display: block;
   background:
@@ -408,9 +418,15 @@ h3 {
   width: 100%;
   height: 100%;
   min-height: 590px;
+  overflow: hidden;
+  contain: layout paint;
+  isolation: isolate;
 }
 
 .splat-viewport canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
@@ -419,6 +435,7 @@ h3 {
 .splat-fallback {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: grid;
   place-items: center;
   padding: 46px;
