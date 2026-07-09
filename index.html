@@ -3,250 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Data Scientist & ML Enthusiast</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Mohamed Elhag — I make machine learning feel human</title>
+    <meta name="description" content="Mohamed Elhag — data scientist at Georgetown, mechanical engineer before that. Building technology that puts the person using it at the center.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body id="top">
     <header>
-        <nav>
-            <div class="logo">Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="theme-toggle">
-                <span class="theme-toggle-icon">☀️</span>
+        <nav class="site-nav">
+            <a href="#top" class="wordmark">Mohamed Elhag</a>
+            <div class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="btn btn--rose btn--sm">Get in touch</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="hero">
-            <div class="container">
-                <h1 class="fade-in">Hello, I'm <span class="highlight">Mohamed</span></h1>
-                <h2 class="fade-in">Data Scientist & Machine Learning Enthusiast</h2>
-                <p class="fade-in">Building technology with human values at the center</p>
-                <div class="cta-buttons fade-in">
-                    <a href="#projects" class="btn primary">View My Work</a>
-                    <a href="#contact" class="btn secondary">Get In Touch</a>
+        <!-- Hero -->
+        <section class="hero">
+            <div>
+                <h1>Hi, I'm Mohamed.<br><span class="serif italic rose">I make machine learning feel human.</span></h1>
+                <p class="hero-sub">Data scientist at Georgetown, mechanical engineer before that. I care about what the model does for the person using it.</p>
+                <div class="hero-actions">
+                    <a href="#work" class="btn btn--brown">See my work</a>
+                    <a href="#contact" class="btn-underline">Say hello</a>
                 </div>
+                <div class="hero-currently">CURRENTLY · M.S. DATA SCIENCE &amp; ANALYTICS @ GEORGETOWN · AI CONCENTRATION · '27</div>
+            </div>
+            <div class="polaroid">
+                <div class="polaroid-frame">
+                    <img src="img/selfie.jpg" alt="Mohamed Elhag">
+                </div>
+                <div class="polaroid-tape"></div>
             </div>
         </section>
 
-        <section id="about">
+        <!-- Tagline band -->
+        <div class="tagline-band">
+            <span>✶ &nbsp;Building technology that puts you at the center&nbsp; ✶</span>
+        </div>
+
+        <!-- Work -->
+        <section id="work" class="section-work">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I'm a data scientist and machine learning enthusiast passionate about creating technology that serves human needs. My approach combines technical expertise with a deep understanding of how people interact with, and benefit from, technology.</p>
-                        <p>With a background in mechanical engineering, I focus on developing solutions that are not only technically sound but also ethically responsible and accessible to everyone.</p>
-                        <p>I'm currently pursuing my M.S. in Data Science &amp; Analytics at Georgetown University, with a concentration in Artificial Intelligence (expected 2027), exploring the intersection of tech, ethics, and impact.</p>
-                        <p>When I'm not coding, you can find me listening to the Science Vs podcast.</p>
-                    </div>
-                    <div class="about-image">
-                        <div class="image-placeholder">
-                            <img src="img/selfie.png" alt="Selfie" class="image-placeholder"/>
-                        </div>
+                <div class="section-head">
+                    <div class="eyebrow">01 — Work</div>
+                    <h2>Things I've made</h2>
+                </div>
+
+                <!-- Featured: Spatia -->
+                <div class="featured">
+                    <img src="img/spatia/spatia-splat-poster.jpg" alt="Spatia — 3D scan of a room" class="featured-img">
+                    <div class="featured-body">
+                        <div class="eyebrow">Featured</div>
+                        <h3>Spatia — iPhone to 3D</h3>
+                        <p>Walk through a room with your iPhone; get back a photorealistic 3D model and an accurate floor plan. No special hardware — just the phone in your pocket.</p>
+                        <div class="stack-line">Swift / ARKit · PyTorch · Gaussian Splatting · React / WebGL</div>
+                        <a href="spatia.html" class="link-rose">View project →</a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="project-grid">
-                    <!-- Spatia -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="image-placeholder">
-                                <img src="img/spatia/spatia-splat-poster.jpg" alt="Spatia 3D Gaussian Splat viewer" class="image-placeholder"/>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Spatia — iPhone to 3D</h3>
-                            <p>Turns an ordinary iPhone walk-through of a room into a photorealistic, explorable 3D model and a dimensionally-accurate floor plan — no special hardware.</p>
-                            <div class="tags">
-                                <span class="tag">Swift / ARKit</span>
-                                <span class="tag">PyTorch</span>
-                                <span class="tag">Gaussian Splatting</span>
-                                <span class="tag">React / WebGL</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="spatia.html" class="project-link">View Project</a>
-                            </div>
-                        </div>
+                <!-- Pigeon -->
+                <div class="work-row">
+                    <img src="pigeons/assets/images/IMG_0816-hero.jpg" alt="Pigeons on a war memorial">
+                    <div>
+                        <h3>Our Fallen Hero: The Pigeon</h3>
+                        <p>A scrollytelling data story about how America turned its decorated war heroes into "rats with wings."</p>
+                        <div class="stack-line">Data Viz · Scrollytelling · Quarto</div>
                     </div>
+                    <a href="pigeons/index.html" class="link-rose">View →</a>
+                </div>
 
-                    <!-- Pigeons -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="image-placeholder">
-                                <img src="pigeons/assets/images/IMG_0816-hero.jpg" alt="Pigeons perched on a war memorial statue" class="image-placeholder"/>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Our Fallen Hero: The Pigeon</h3>
-                            <p>A scrollytelling data narrative on how American culture rewrote pigeons from wartime heroes into urban pests. My DSAN 5200 final.</p>
-                            <div class="tags">
-                                <span class="tag">Data Viz</span>
-                                <span class="tag">Scrollytelling</span>
-                                <span class="tag">Quarto</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="pigeons/index.html" class="project-link">View Project</a>
-                            </div>
-                        </div>
+                <!-- Lunar Lander -->
+                <div class="work-row">
+                    <img src="img/lunar-lander.png" alt="Lunar Lander simulation">
+                    <div>
+                        <h3>Lunar Lander, but make it RL</h3>
+                        <p>Teaching an agent to land on the moon without embarrassing itself. Deep reinforcement learning on OpenAI Gym.</p>
+                        <div class="stack-line">Python · OpenAI Gym · TensorFlow</div>
                     </div>
+                    <a href="lunar-lander.html" class="link-rose">View →</a>
+                </div>
 
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="image-placeholder">
-                                <img src="img/lunar-lander.png" alt="Lunar Lander" class="image-placeholder"/>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Lunar Lander with Reinforcement Learning</h3>
-                            <p>Training an AI agent to land safely on the moon's surface using reinforcement learning techniques.</p>
-                            <div class="tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">OpenAI Gym</span>
-                                <span class="tag">TensorFlow</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="lunar-lander.html" class="project-link">View Project</a>
-                                <a href="https://github.com/kiillmo/machine-learning/blob/main/ml/coursera-labs/C3/C3_W3_A1_Assignment.ipynb" class="project-link">GitHub</a>
-                            </div>
-                        </div>
+                <!-- Mini entries -->
+                <div class="work-mini">
+                    <div>
+                        <h3>Xmas Everything, revisited</h3>
+                        <p>Digging back into old e-commerce data with new tools to see what I missed the first time.</p>
+                        <a href="xmas-everything.html" class="link-rose">View →</a>
                     </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="image-placeholder">
-                                <img src="img/xmas-logo.jpg" alt="Xmas Everything" class="image-placeholder"/>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Xmas Everything Data</h3>
-                            <p>Reanalyzing e-commerce data with advanced techniques to uncover new insights and demonstrate growth in data science skills.</p>
-                            <div class="tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Pandas</span>
-                                <span class="tag">Matplotlib</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="xmas-everything.html" class="project-link">View Project</a>
-                                <a href="https://github.com/kiillmo/Georgetown/blob/main/Xmas_Everything_Data.ipynb" class="project-link">GitHub</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="image-placeholder">
-                                <img src="img/rag.png" alt="RAG" class="image-placeholder"/>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Interactive Resume Assistant</h3>
-                            <p>A simple RAG (Retrieval-Augmented Generation) demonstration using my resume data. For a more complete version, check out my GitHub.</p>
-                            <div class="tags">
-                                <span class="tag">Ollama</span>
-                                <span class="tag">Langchain</span>
-                                <span class="tag">RAG</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="mohamed-rag.html" class="project-link">View Project</a>
-                                <a href="https://github.com/kiillmo/Georgetown/tree/main/Local%20LLM%20RAG%20Project" class="project-link">GitHub</a>
-                            </div>
-                        </div>
+                    <div>
+                        <h3>A resume you can interrogate</h3>
+                        <p>A little RAG chatbot that answers questions about my resume, so you don't have to read it.</p>
+                        <a href="mohamed-rag.html" class="link-rose">View →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills">
-            <div class="container">
-                <h2 class="section-title">Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>Programming Languages</h3>
-                        <ul class="skill-list">
-                            <li>Python</li>
-                            <li>R</li>
-                            <li>SQL</li>
-                            <li>MATLAB</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Machine Learning</h3>
-                        <ul class="skill-list">
-                            <li>TensorFlow</li>
-                            <li>Scikit-learn</li>
-                            <li>Reinforcement Learning</li>
-                            <li>Neural Networks</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Data Science</h3>
-                        <ul class="skill-list">
-                            <li>Data Cleaning & Preprocessing</li>
-                            <li>Statistical Modeling</li>
-                            <li>Data Visualization</li>
-                            <li>PowerBI</li>
-                        </ul>
-                    </div>
+        <!-- About -->
+        <section id="about" class="section-about">
+            <div class="about-copy">
+                <div class="eyebrow">02 — About</div>
+                <h2>Engineer first, data scientist <span class="serif italic rose">by choice.</span></h2>
+                <p>I started in mechanical engineering, got pulled in by the models, and never really left. These days I'm doing my M.S. in Data Science &amp; Analytics at Georgetown — AI concentration, class of '27 — mostly chewing on one question: how do we build this stuff so it's actually good for the humans on the other end?</p>
+                <p>The mech-e background still shapes how I work: build it, test it, make sure it holds up in the real world.</p>
+            </div>
+            <div class="about-aside">
+                <div class="skill-group">
+                    <div class="meta-label">Languages</div>
+                    <div class="skill-group-list">Python · R · SQL · MATLAB</div>
+                </div>
+                <div class="skill-group">
+                    <div class="meta-label">Machine Learning</div>
+                    <div class="skill-group-list">PyTorch · TensorFlow · Scikit-learn · Reinforcement Learning · Neural Networks</div>
+                </div>
+                <div class="skill-group">
+                    <div class="meta-label">Data</div>
+                    <div class="skill-group-list">Statistical Modeling · Visualization · PowerBI</div>
+                </div>
+                <div class="offclock-card">
+                    <div class="eyebrow">Off the clock</div>
+                    <div class="offclock-body"><em>Science Vs,</em> on repeat.<br>Team Pigeon — see the work above.</div>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
+        <!-- Contact -->
+        <section id="contact" class="section-contact">
             <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <p>I'm always interested in new projects, collaborations, or just having a conversation about technology and its impact.</p>
-                        <div class="contact-links">
-                            <a href="mailto:contact@mohamedelhag.com" class="contact-link">contact@mohamedelhag.com</a>
-                            <a href="https://github.com/kiillmo" class="contact-link">GitHub</a>
-                            <a href="https://www.linkedin.com/in/mohamed-elhag-83ba85a1/" class="contact-link">LinkedIn</a>
-                        </div>
-                    </div>
-                    <form id="contact-form" class="contact-form" action="process-form.php" method="POST">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn primary">Send Message</button>
-                    </form>
+                <div class="eyebrow">03 — Contact</div>
+                <h2>Come say hi.</h2>
+                <p class="contact-lead">New projects, collaborations, or just a good conversation about tech and its impact.</p>
+
+                <div>
+                    <a href="mailto:contact@mohamedelhag.com" class="email-link">contact@mohamedelhag.com</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/kiillmo">GitHub</a>
+                    <a href="https://www.linkedin.com/in/mohamed-elhag-83ba85a1/">LinkedIn</a>
+                </div>
+
+                <div class="footer-row">
+                    <span>© 2026 Mohamed Elhag</span>
+                    <span class="footer-tag">Building technology that puts you at the center.</span>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Mohamed Elhag. All rights reserved.</p>
-            <p class="footer-tagline">Building technology that puts you at the center.</p>
-        </div>
-    </footer>
 
     <script src="js/scripts.js"></script>
 </body>

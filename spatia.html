@@ -3,366 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spatia — iPhone to Photorealistic 3D | Mohamed Elhag</title>
-    <meta name="description" content="Spatia turns an ordinary iPhone walk-through of a room into a photorealistic, explorable 3D Gaussian Splat and a dimensionally-accurate floor plan — no special hardware, just the phone in your pocket.">
+    <title>Spatia — iPhone to photorealistic 3D | Mohamed Elhag</title>
+    <meta name="description" content="An ordinary iPhone walk-through of a room becomes a photorealistic, explorable 3D model — and a floor plan you can trust. Built end-to-end: mobile app, ML pipeline, cloud, and web viewer.">
     <link rel="icon" href="img/spatia/mark-navy.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/project-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Basic Open Graph so the link previews nicely when shared -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Spatia — iPhone to Photorealistic 3D">
-    <meta property="og:description" content="Turn an ordinary iPhone walk-through of a room into a photorealistic, explorable 3D model and a dimensionally-accurate floor plan.">
-    <meta property="og:image" content="img/spatia/spatia-splat-poster.jpg">
-
-    <style>
-        /* ---- Spatia-specific components (scoped to this page) ---- */
-        .spatia-logo {
-            max-width: 240px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 1.5rem;
-        }
-        .spatia-logo.on-dark { display: none; }
-        [data-theme="dark"] .spatia-logo.on-light { display: none; }
-        [data-theme="dark"] .spatia-logo.on-dark { display: block; }
-
-        /* Video frames */
-        .video-frame {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px var(--shadow-color);
-            background: #060B1B; /* Spatia ink, avoids white flash before play */
-            line-height: 0;
-        }
-        .video-frame video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .video-frame.capture-clip {
-            max-width: 520px;
-            margin: 0 auto;
-        }
-        .video-caption {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin: 0.8rem 0 0;
-        }
-
-        /* Status pill */
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            background: var(--accent-color-light);
-            color: var(--text-primary);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #17805A;
-            box-shadow: 0 0 0 3px rgba(23, 128, 90, 0.2);
-        }
-
-        /* How it works — step flow */
-        .flow-steps {
-            display: grid;
-            gap: 1.5rem;
-            margin: 1.5rem 0 0;
-        }
-        .flow-step {
-            display: flex;
-            gap: 1.25rem;
-            align-items: flex-start;
-        }
-        .flow-step .step-num {
-            flex-shrink: 0;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background: var(--accent-color);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-        }
-        .flow-step-body { flex: 1; }
-        .flow-step-body h3 { margin: 0.3rem 0 0.5rem; }
-        .flow-step-body p:last-child { margin-bottom: 0; }
-
-        /* Technical highlights */
-        .highlight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.5rem;
-        }
-        .highlight-card {
-            background: var(--bg-primary);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 3px 10px var(--shadow-color);
-            border-top: 3px solid var(--accent-color);
-        }
-        .highlight-card h3 {
-            margin-top: 0;
-            margin-bottom: 0.6rem;
-            font-size: 1.15rem;
-        }
-        .highlight-card .kicker {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin-bottom: 0.4rem;
-        }
-        .highlight-card p {
-            margin-bottom: 0;
-            font-size: 0.95rem;
-        }
-
-        /* Sidebar tech stack */
-        .stack-group { margin-bottom: 1.3rem; }
-        .stack-group:last-child { margin-bottom: 0; }
-        .stack-group strong {
-            display: block;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        .stack-group .tags { margin: 0; }
-
-        @media (max-width: 768px) {
-            .video-frame.capture-clip { max-width: 100%; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/project-styles.css">
 </head>
-<body>
+<body id="top">
     <header>
-        <nav>
-            <div class="logo">Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#projects" class="active">Projects</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <div class="theme-toggle">
-                <span class="theme-toggle-icon">☀️</span>
+        <nav class="site-nav">
+            <a href="index.html" class="wordmark">Mohamed Elhag</a>
+            <div class="nav-links">
+                <a href="index.html#work">← All work</a>
+                <a href="index.html#contact" class="btn btn--rose btn--sm">Get in touch</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="project-hero" class="project-hero">
-            <div class="container">
-                <div class="project-navigation">
-                    <a href="index.html#projects" class="btn secondary">← Back to Projects</a>
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="eyebrow">Project — Flagship</div>
+            <div class="phero-grid">
+                <div>
+                    <img src="img/spatia/lockup-navy.png" alt="Spatia" class="spatia-lockup">
+                    <p class="project-tagline-serif">An ordinary iPhone walk-through of a room becomes a photorealistic, explorable 3D model — <span class="serif italic rose">and a floor plan you can trust.</span></p>
+                    <div class="meta-rows tight">
+                        <div class="meta-row">
+                            <span class="k">MY ROLE</span>
+                            <span class="v">Built end-to-end — mobile app, ML pipeline, cloud, and web viewer</span>
+                        </div>
+                        <div class="meta-row center">
+                            <span class="k">STATUS</span>
+                            <span class="status-pill"><span class="status-dot"></span>Active independent project · 2026</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="k">STACK</span>
+                            <span class="v stack">Swift / ARKit · PyTorch · 3D Gaussian Splatting · React / WebGL · Cloud GPU</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-intro">
-                    <div class="project-visual">
-                        <div class="video-frame">
-                            <video autoplay loop muted playsinline preload="metadata"
-                                   poster="img/spatia/spatia-splat-poster.jpg">
-                                <source src="video/spatia-splat.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <p class="video-caption">A captured room, reconstructed as a 3D Gaussian Splat and explored in the browser.</p>
+                <div>
+                    <div class="media-card media-card--dark">
+                        <video autoplay loop muted playsinline preload="metadata" poster="img/spatia/spatia-splat-poster.jpg">
+                            <source src="video/spatia-splat.mp4" type="video/mp4">
+                        </video>
                     </div>
-                    <div class="project-summary">
-                        <img src="img/spatia/lockup-navy.png" alt="Spatia" class="spatia-logo on-light">
-                        <img src="img/spatia/lockup-white.png" alt="Spatia" class="spatia-logo on-dark">
-                        <p class="project-tagline">Spatia turns an ordinary iPhone walk-through of a room into a photorealistic, explorable 3D model and a dimensionally-accurate floor plan — no special hardware, just the phone in your pocket.</p>
-
-                        <div class="project-metadata">
-                            <div class="metadata-item">
-                                <strong>My Role:</strong>
-                                <span>Built end-to-end — mobile app, ML pipeline, cloud, and web viewer</span>
-                            </div>
-                            <div class="metadata-item">
-                                <strong>Status:</strong>
-                                <span class="status-pill"><span class="status-dot"></span>Active independent project · 2026</span>
-                            </div>
-                            <div class="metadata-item">
-                                <strong>Technologies:</strong>
-                                <div class="tags">
-                                    <span class="tag">Swift / ARKit</span>
-                                    <span class="tag">PyTorch</span>
-                                    <span class="tag">3D Gaussian Splatting</span>
-                                    <span class="tag">React / WebGL</span>
-                                    <span class="tag">Cloud GPU</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="media-caption">A captured room, reconstructed as a 3D Gaussian Splat and explored in the browser.</p>
                 </div>
             </div>
         </section>
 
-        <section id="project-content" class="project-content">
-            <div class="container">
-                <div class="content-grid">
-                    <div class="main-content">
-                        <div class="content-section">
-                            <h2>The Problem</h2>
-                            <p>Capturing a space in 3D usually forces a tradeoff. Professional rigs — laser scanners, camera arrays, dedicated depth hardware — are expensive, heavy, and slow to operate. The consumer tools that run on a phone tend to produce rough, blocky geometry that looks nothing like the real room and can't be trusted for measurements.</p>
-                            <p>Getting output that is <em>both</em> photorealistic <em>and</em> dimensionally accurate, from hardware people already own, is genuinely hard. That gap is what Spatia set out to close.</p>
-                        </div>
+        <!-- Content -->
+        <section class="project-content">
+            <div class="project-layout">
+                <div class="main-content">
+                    <div class="psection">
+                        <div class="pnum">01</div>
+                        <h2>The problem</h2>
+                        <p>Capturing a space in 3D usually forces a tradeoff. Professional rigs — laser scanners, camera arrays, dedicated depth hardware — are expensive, heavy, and slow to operate. The consumer tools that run on a phone tend to produce rough, blocky geometry that looks nothing like the real room and can't be trusted for measurements.</p>
+                        <p>Getting output that is <em>both</em> photorealistic <em>and</em> dimensionally accurate, from hardware people already own, is genuinely hard. That gap is what Spatia set out to close.</p>
+                    </div>
 
-                        <div class="content-section">
-                            <h2>What Spatia Does</h2>
-                            <p>Spatia uses the LiDAR sensor and cameras already built into modern iPhones to capture a space, then reconstructs it as a <strong>3D Gaussian Splat</strong> — a state-of-the-art, photorealistic 3D representation you can fly through in a browser — alongside a clean, measured floor plan.</p>
-                            <p>You walk through a room for a couple of minutes; you get back something you can <strong>explore, measure, and share</strong>. No rig, no markers, no special hardware — just the phone in your pocket.</p>
-                        </div>
+                    <div class="psection">
+                        <div class="pnum">02</div>
+                        <h2>What Spatia does</h2>
+                        <p>Spatia uses the LiDAR sensor and cameras already built into modern iPhones to capture a space, then reconstructs it as a <strong>3D Gaussian Splat</strong> — a state-of-the-art, photorealistic 3D representation you can fly through in a browser — alongside a clean, measured floor plan.</p>
+                        <p>You walk through a room for a couple of minutes; you get back something you can <strong>explore, measure, and share</strong>. No rig, no markers, no special hardware — just the phone in your pocket.</p>
+                    </div>
 
-                        <div class="content-section">
-                            <h2>How It Works</h2>
-                            <div class="flow-steps">
-                                <div class="flow-step">
-                                    <div class="step-num">1</div>
-                                    <div class="flow-step-body">
-                                        <h3>Capture</h3>
-                                        <p>You point the phone and walk. Spatia reads depth from the LiDAR sensor and tracks the camera's motion in real time, with <strong>live on-screen guidance</strong> that shows which parts of the room are already well-covered and where to aim next — so first-time users get a good scan on the first try. As it records, the app intelligently selects the highest-quality frames rather than blindly keeping everything.</p>
-                                        <div class="video-frame capture-clip">
-                                            <video autoplay loop muted playsinline preload="metadata"
-                                                   poster="img/spatia/spatia-capture-poster.jpg">
-                                                <source src="video/spatia-capture.mp4" type="video/mp4">
-                                            </video>
-                                        </div>
-                                        <p class="video-caption">Live capture guidance running on-device during a room scan.</p>
-                                        <!-- TODO (Mohamed): if you want to show the measured floor-plan output, drop an image/export here. Not fabricating one. -->
-                                    </div>
+                    <div class="psection how-it-works">
+                        <div class="pnum">03</div>
+                        <h2 class="mb-28">How it works</h2>
+
+                        <div class="pstep gap-lg">
+                            <div class="step-circle">1</div>
+                            <div class="step-body">
+                                <h3 class="big">Capture</h3>
+                                <p class="mb">You point the phone and walk. Spatia reads depth from the LiDAR sensor and tracks the camera's motion in real time, with <strong>live on-screen guidance</strong> that shows which parts of the room are already well-covered and where to aim next — so first-time users get a good scan on the first try. As it records, the app intelligently selects the highest-quality frames rather than blindly keeping everything.</p>
+                                <div class="media-card media-card--dark media-card--sm step-media">
+                                    <video autoplay loop muted playsinline preload="metadata" poster="img/spatia/spatia-capture-poster.jpg">
+                                        <source src="video/spatia-capture.mp4" type="video/mp4">
+                                    </video>
                                 </div>
-                                <div class="flow-step">
-                                    <div class="step-num">2</div>
-                                    <div class="flow-step-body">
-                                        <h3>Reconstruct</h3>
-                                        <p>The captured images and depth are handed to a custom training pipeline running on on-demand cloud GPUs, which reconstructs the scene as a photorealistic 3D Gaussian Splat. Because the capture carries real-world depth and scale, the output is <strong>metrically accurate</strong> — distances in the model correspond to distances in the real room.</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="step-num">3</div>
-                                    <div class="flow-step-body">
-                                        <h3>Explore</h3>
-                                        <p>The finished splat streams to a web viewer that renders it interactively in the browser — nothing to install. You can orbit the space, look around from any angle, and take measurements straight off the model, as shown at the top of this page.</p>
-                                    </div>
-                                </div>
+                                <p class="media-caption">Live capture guidance running on-device during a room scan.</p>
                             </div>
                         </div>
 
-                        <div class="content-section">
-                            <h2>Technical Highlights</h2>
-                            <p>Spatia is a full vertical slice across four hard domains that rarely live in one project:</p>
-                            <div class="highlight-grid">
-                                <div class="highlight-card">
-                                    <span class="kicker">On-device AR &amp; sensing</span>
-                                    <h3>Good scans on the first try</h3>
-                                    <p>Real-time capture fuses the phone's LiDAR depth sensor with camera-motion tracking, and live guidance coaches non-experts through full coverage — while the app selects the highest-quality frames as it goes.</p>
-                                </div>
-                                <div class="highlight-card">
-                                    <span class="kicker">3D reconstruction &amp; ML</span>
-                                    <h3>Photorealistic and to scale</h3>
-                                    <p>A custom training pipeline turns the captured images and depth into a photorealistic Gaussian Splat. Because the capture carries real depth and scale, the result is metrically accurate, not just good-looking.</p>
-                                </div>
-                                <div class="highlight-card">
-                                    <span class="kicker">Research contribution</span>
-                                    <h3>Predicting quality before you compute it</h3>
-                                    <p>Spatia can estimate the best quality a scan could ever achieve <em>before</em> any expensive reconstruction runs — grading the raw capture itself. That turns capture from a black box into a measurable, improvable step and avoids spending compute on data that could never produce a good result.</p>
-                                </div>
-                                <div class="highlight-card">
-                                    <span class="kicker">Distributed systems &amp; full-stack</span>
-                                    <h3>From phone to browser</h3>
-                                    <p>Reconstruction runs on on-demand cloud GPUs; results are served through a web front-end that renders the interactive 3D splat in real time, backed by an API and a relational database.</p>
-                                </div>
+                        <div class="pstep gap-lg">
+                            <div class="step-circle">2</div>
+                            <div class="step-body">
+                                <h3 class="big">Reconstruct</h3>
+                                <p>The captured images and depth are handed to a custom training pipeline running on on-demand cloud GPUs, which reconstructs the scene as a photorealistic 3D Gaussian Splat. Because the capture carries real-world depth and scale, the output is <strong>metrically accurate</strong> — distances in the model correspond to distances in the real room.</p>
                             </div>
                         </div>
 
-                        <div class="content-section">
-                            <h2>My Role</h2>
-                            <p>I built Spatia end-to-end: the iOS capture app, the 3D reconstruction and machine-learning pipeline, the cloud compute that runs it, and the web viewer that serves the results. It's the project where my mechanical-engineering instinct for real-world measurement meets the data-science and systems work I've been growing into — and it's an active, independent project I'm still pushing forward in 2026.</p>
+                        <div class="pstep">
+                            <div class="step-circle">3</div>
+                            <div class="step-body">
+                                <h3 class="big">Explore</h3>
+                                <p>The finished splat streams to a web viewer that renders it interactively in the browser — nothing to install. You can orbit the space, look around from any angle, and take measurements straight off the model, as shown at the top of this page.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <aside class="sidebar">
-                        <div class="sidebar-section">
-                            <h3>At a Glance</h3>
-                            <ul class="key-concepts">
-                                <li>
-                                    <strong>One-line</strong>
-                                    <p>iPhone walk-through → photorealistic, explorable 3D model + measured floor plan.</p>
-                                </li>
-                                <li>
-                                    <strong>Why it's hard</strong>
-                                    <p>Photorealistic <em>and</em> metrically accurate, from hardware you already own.</p>
-                                </li>
-                                <li>
-                                    <strong>Scope</strong>
-                                    <p>Mobile · ML pipeline · cloud · web — built end-to-end.</p>
-                                </li>
-                            </ul>
+                    <div class="psection">
+                        <div class="pnum">04</div>
+                        <h2 class="mb-14">Technical highlights</h2>
+                        <p class="mb-28">Spatia is a full vertical slice across four hard domains that rarely live in one project:</p>
+                        <div class="card-grid">
+                            <div class="info-card">
+                                <div class="kicker">ON-DEVICE AR &amp; SENSING</div>
+                                <h3>Good scans on the first try</h3>
+                                <p>Real-time capture fuses the phone's LiDAR depth sensor with camera-motion tracking, and live guidance coaches non-experts through full coverage — while the app selects the highest-quality frames as it goes.</p>
+                            </div>
+                            <div class="info-card">
+                                <div class="kicker">3D RECONSTRUCTION &amp; ML</div>
+                                <h3>Photorealistic and to scale</h3>
+                                <p>A custom training pipeline turns the captured images and depth into a photorealistic Gaussian Splat. Because the capture carries real depth and scale, the result is metrically accurate, not just good-looking.</p>
+                            </div>
+                            <div class="info-card info-card--tint">
+                                <div class="kicker">RESEARCH CONTRIBUTION</div>
+                                <h3>Predicting quality before you compute it</h3>
+                                <p>Spatia can estimate the best quality a scan could ever achieve <em>before</em> any expensive reconstruction runs — grading the raw capture itself. That turns capture from a black box into a measurable, improvable step and avoids spending compute on data that could never produce a good result.</p>
+                            </div>
+                            <div class="info-card">
+                                <div class="kicker">DISTRIBUTED SYSTEMS &amp; FULL-STACK</div>
+                                <h3>From phone to browser</h3>
+                                <p>Reconstruction runs on on-demand cloud GPUs; results are served through a web front-end that renders the interactive 3D splat in real time, backed by an API and a relational database.</p>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="sidebar-section">
-                            <h3>Tech Stack</h3>
-                            <div class="stack-group">
-                                <strong>iOS / Mobile AR</strong>
-                                <div class="tags">
-                                    <span class="tag">Swift</span>
-                                    <span class="tag">ARKit</span>
-                                    <span class="tag">RoomPlan</span>
-                                </div>
-                            </div>
-                            <div class="stack-group">
-                                <strong>3D / ML</strong>
-                                <div class="tags">
-                                    <span class="tag">Python</span>
-                                    <span class="tag">PyTorch</span>
-                                    <span class="tag">Gaussian Splatting</span>
-                                    <span class="tag">LiDAR + pose fusion</span>
-                                </div>
-                            </div>
-                            <div class="stack-group">
-                                <strong>Cloud / Infra</strong>
-                                <div class="tags">
-                                    <span class="tag">On-demand GPU</span>
-                                    <span class="tag">Containerized training</span>
-                                    <span class="tag">Object storage</span>
-                                </div>
-                            </div>
-                            <div class="stack-group">
-                                <strong>Web</strong>
-                                <div class="tags">
-                                    <span class="tag">TypeScript</span>
-                                    <span class="tag">React</span>
-                                    <span class="tag">WebGL</span>
-                                    <span class="tag">REST API + DB</span>
-                                </div>
+                    <div class="psection">
+                        <div class="pnum">05</div>
+                        <h2>My role</h2>
+                        <p>I built Spatia end-to-end: the iOS capture app, the 3D reconstruction and machine-learning pipeline, the cloud compute that runs it, and the web viewer that serves the results. It's the project where my mechanical-engineering instinct for real-world measurement meets the data-science and systems work I've been growing into — and it's an active, independent project I'm still pushing forward in 2026.</p>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="side-card">
+                        <h3>At a glance</h3>
+                        <div class="side-block">
+                            <div class="side-label">ONE-LINE</div>
+                            <p>iPhone walk-through → photorealistic, explorable 3D model + measured floor plan.</p>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label">WHY IT'S HARD</div>
+                            <p>Photorealistic <em>and</em> metrically accurate, from hardware you already own.</p>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label">SCOPE</div>
+                            <p>Mobile · ML pipeline · cloud · web — built end-to-end.</p>
+                        </div>
+                    </div>
+
+                    <div class="side-card">
+                        <h3>Tech stack</h3>
+                        <div class="side-block">
+                            <div class="side-label chip-label">IOS / MOBILE AR</div>
+                            <div class="chip-row">
+                                <span class="chip">Swift</span>
+                                <span class="chip">ARKit</span>
+                                <span class="chip">RoomPlan</span>
                             </div>
                         </div>
-                    </aside>
-                </div>
+                        <div class="side-block">
+                            <div class="side-label chip-label">3D / ML</div>
+                            <div class="chip-row">
+                                <span class="chip">Python</span>
+                                <span class="chip">PyTorch</span>
+                                <span class="chip">Gaussian Splatting</span>
+                                <span class="chip">LiDAR + pose fusion</span>
+                            </div>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label chip-label">CLOUD / INFRA</div>
+                            <div class="chip-row">
+                                <span class="chip">On-demand GPU</span>
+                                <span class="chip">Containerized training</span>
+                                <span class="chip">Object storage</span>
+                            </div>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label chip-label">WEB</div>
+                            <div class="chip-row">
+                                <span class="chip">TypeScript</span>
+                                <span class="chip">React</span>
+                                <span class="chip">WebGL</span>
+                                <span class="chip">REST API + DB</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Mohamed Elhag. All rights reserved.</p>
-            <p class="footer-tagline">Building technology that puts you at the center.</p>
+    <!-- Footer -->
+    <footer class="project-footer">
+        <div class="fwrap">
+            <p class="prompt">Want to hear more about Spatia?</p>
+            <a href="mailto:contact@mohamedelhag.com" class="email-link">contact@mohamedelhag.com</a>
+            <div class="pfoot-meta">
+                <span>© 2026 Mohamed Elhag</span>
+                <span class="pfoot-tag">Building technology that puts you at the center.</span>
+            </div>
         </div>
     </footer>
 

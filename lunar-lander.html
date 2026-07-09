@@ -3,100 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunar Lander RL Project | Portfolio</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/project-styles.css">
+    <title>Lunar Lander, but make it RL | Mohamed Elhag</title>
+    <meta name="description" content="Training an AI agent to land safely on the moon's surface — no instructions, just trial, error, and a well-designed reward. Deep reinforcement learning on OpenAI Gym.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/project-styles.css">
 </head>
-<body>
+<body id="top">
     <header>
-        <nav>
-            <div class="logo">Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#projects" class="active">Projects</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="notebooks.html">Notebooks</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <div class="theme-toggle">
-                <span class="theme-toggle-icon">☀️</span>
+        <nav class="site-nav">
+            <a href="index.html" class="wordmark">Mohamed Elhag</a>
+            <div class="nav-links">
+                <a href="index.html#work">← All work</a>
+                <a href="index.html#contact" class="btn btn--rose btn--sm">Get in touch</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="project-hero" class="project-hero">
-            <div class="container">
-                <div class="project-navigation">
-                    <a href="index.html#projects" class="btn secondary">← Back to Projects</a>
+        <!-- Hero -->
+        <section class="project-hero">
+            <div class="eyebrow">Project — Reinforcement Learning</div>
+            <h1>Lunar Lander, <span class="serif italic rose">but make it RL.</span></h1>
+            <div class="phero-grid">
+                <div class="media-card">
+                    <img src="img/lunar_lander.gif" alt="Trained agent landing the lunar module">
                 </div>
-                <h1 class="project-title">Lunar Lander with Reinforcement Learning</h1>
-                <div class="project-intro">
-                    <div class="project-visual">
-                        <div class="project-visual-container">
-                            <!-- Animated lunar lander GIF or static image -->
-                            <div class="lunar-lander-animation">
-                                <img src="img/lunar_lander.gif" alt="Lunar Lander gif" class="main-visual" />
-                                <!-- Replace with actual animation/screenshot later -->
-                            </div>
+                <div>
+                    <p class="project-lead">Training an AI agent to land safely on the moon's surface — no instructions, just trial, error, and a well-designed reward.</p>
+                    <div class="meta-rows">
+                        <div class="meta-row">
+                            <span class="k">TYPE</span>
+                            <span class="v">Reinforcement Learning</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="k">STACK</span>
+                            <span class="v stack">Python · TensorFlow · OpenAI Gym · DQN</span>
                         </div>
                     </div>
-                    <div class="project-summary">
-                        <p class="project-tagline">Training an AI agent to land safely on the moon's surface using reinforcement learning techniques.</p>
-                        
-                        <div class="project-metadata">
-                            <div class="metadata-item">
-                                <strong>Project Type:</strong>
-                                <span>Reinforcement Learning</span>
-                            </div>
-                            <div class="metadata-item">
-                                <strong>Technologies:</strong>
-                                <div class="tags">
-                                    <span class="tag">Python</span>
-                                    <span class="tag">TensorFlow</span>
-                                    <span class="tag">OpenAI Gym</span>
-                                    <span class="tag">Reinforcement Learning</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-links">
-                            <a href="https://github.com/kiillmo/machine-learning/blob/main/ml/coursera-labs/C3/C3_W3_A1_Assignment.ipynb" class="btn secondary">GitHub Repo</a>
-                        </div>
-                    </div>
+                    <a href="https://github.com/kiillmo/machine-learning/blob/main/ml/coursera-labs/C3/C3_W3_A1_Assignment.ipynb" class="btn-outline">View on GitHub →</a>
                 </div>
             </div>
         </section>
 
-        <section id="project-content" class="project-content">
-            <div class="container">
-                <div class="content-grid">
-                    <div class="main-content">
-                        <div class="content-section">
-                            <h2>Project Overview</h2>
-                            <p>This project explores reinforcement learning by training an AI agent to safely land a spacecraft on the lunar surface. Unlike supervised learning, the agent wasn't explicitly taught how to land - it had to discover the optimal strategy through trial and error.</p>
-                            
-                            <p>The challenge involves controlling thrust and rotation to navigate the lander to a designated landing pad without crashing. The agent receives rewards for moving toward the pad and penalties for crashing or using fuel. Through thousands of simulated landings, the agent gradually learns effective landing strategies.</p>
-                            
-                            <div class="personal-note">
-                                <h3>Personal Note</h3>
-                                <p>This is perhaps my favorite project. I vividly remember setting the code to run and then stepping away to watch a Lakers game with my brother. About 45 minutes later, I returned to a successfully trained agent. I was bursting with excitement but when I showed it to my brother he was thoroughly unimpressed. I blame that on the Lakers losing. Despite that, the moment captured the joy I find in data science: witnessing tangible progress in something that once seemed impossible.</p>
-                            </div>
+        <!-- Content -->
+        <section class="project-content">
+            <div class="project-layout">
+                <div class="main-content">
+                    <div class="psection">
+                        <div class="pnum">01</div>
+                        <h2>Overview</h2>
+                        <p>This project explores reinforcement learning by training an AI agent to safely land a spacecraft on the lunar surface. Unlike supervised learning, the agent wasn't explicitly taught how to land — it had to discover the optimal strategy through trial and error.</p>
+                        <p class="mb-28">The challenge involves controlling thrust and rotation to navigate the lander to a designated landing pad without crashing. The agent receives rewards for moving toward the pad and penalties for crashing or using fuel. Through thousands of simulated landings, the agent gradually learns effective landing strategies.</p>
+
+                        <div class="callout">
+                            <div class="callout-title">A personal note</div>
+                            <p>This is perhaps my favorite project. I vividly remember setting the code to run and then stepping away to watch a Lakers game with my brother. About 45 minutes later, I returned to a successfully trained agent. I was bursting with excitement but when I showed it to my brother he was thoroughly unimpressed. I blame that on the Lakers losing. Despite that, the moment captured the joy I find in data science: witnessing tangible progress in something that once seemed impossible.</p>
                         </div>
-                        
-                        <div class="content-section">
-                            <h2>Methodology & Approach</h2>
-                            
-                            <div class="methodology-step">
-                                <h3>1. Environment Setup</h3>
+                    </div>
+
+                    <div class="psection methodology">
+                        <div class="pnum">02</div>
+                        <h2 class="mb-28">Methodology &amp; approach</h2>
+
+                        <div class="pstep">
+                            <div class="step-circle">1</div>
+                            <div class="step-body">
+                                <h3>Environment setup</h3>
                                 <p>I used OpenAI Gym's LunarLander-v2 environment, which simulates a spacecraft landing scenario with realistic physics. The state space includes position, velocity, angle, and angular velocity, while the action space allows controlling main and side thrusters.</p>
                             </div>
-                            
-                            <div class="methodology-step">
-                                <h3>2. Algorithm Selection</h3>
+                        </div>
+
+                        <div class="pstep">
+                            <div class="step-circle">2</div>
+                            <div class="step-body">
+                                <h3>Algorithm selection</h3>
                                 <p>After evaluating several reinforcement learning approaches, I chose Deep Q-Learning (DQN) for this project because:</p>
                                 <ul>
                                     <li>It handles continuous state spaces well</li>
@@ -104,9 +87,12 @@
                                     <li>The discrete action space of the lunar lander is ideal for Q-learning</li>
                                 </ul>
                             </div>
-                            
-                            <div class="methodology-step">
-                                <h3>3. Network Architecture</h3>
+                        </div>
+
+                        <div class="pstep">
+                            <div class="step-circle">3</div>
+                            <div class="step-body">
+                                <h3>Network architecture</h3>
                                 <p>The Q-network consisted of:</p>
                                 <ul>
                                     <li>Input layer matching the state dimension (8 features)</li>
@@ -114,121 +100,115 @@
                                     <li>Output layer with 4 neurons (one for each action)</li>
                                 </ul>
                             </div>
-                            
-                            <div class="methodology-step">
-                                <h3>4. Training Process</h3>
+                        </div>
+
+                        <div class="pstep">
+                            <div class="step-circle">4</div>
+                            <div class="step-body">
+                                <h3>Training process</h3>
                                 <p>The agent trained through these key components:</p>
                                 <ul>
                                     <li>Experience replay to break correlations between consecutive samples</li>
                                     <li>Target network for stable learning</li>
-                                    <li>Epsilon-greedy exploration strategy starting at 100% random actions and gradually becoming more strategic</li>
+                                    <li>Epsilon-greedy exploration starting at 100% random actions and gradually becoming more strategic</li>
                                     <li>Approximately 1500 episodes to reach consistently successful landing</li>
                                 </ul>
                             </div>
                         </div>
-                        
-                        <div class="content-section">
-                            <h2>Challenges & Solutions</h2>
-                            
-                            <div class="challenge-item">
-                                <h3>Challenge: Unstable Learning</h3>
-                                <p>Early training attempts showed high variance in performance with frequent regression.</p>
-                                <p><strong>Solution:</strong> Implemented experience replay with a memory buffer of 100,000 experiences and a target network updated every 100 learning steps, significantly stabilizing the learning process.</p>
-                            </div>
-                            
-                            <div class="challenge-item">
-                                <h3>Challenge: Exploration vs. Exploitation</h3>
-                                <p>The agent would often get stuck in local optima, learning to hover but never land.</p>
-                                <p><strong>Solution:</strong> Fine-tuned the epsilon decay rate to ensure sufficient exploration and added reward shaping to encourage progress toward landing.</p>
-                            </div>
-                            
-                            <div class="challenge-item">
-                                <h3>Challenge: Computational Efficiency</h3>
-                                <p>Initial training was prohibitively slow on my personal computer.</p>
-                                <p><strong>Solution:</strong> Optimized batch sizes and network architecture, and implemented periodic model saving to resume training if interrupted. This reduced training time by approximately 40%.</p>
-                            </div>
+                    </div>
+
+                    <div class="psection">
+                        <div class="pnum">03</div>
+                        <h2 class="mb-28">Challenges &amp; solutions</h2>
+
+                        <div class="challenge">
+                            <h3>Unstable learning</h3>
+                            <p>Early training attempts showed high variance in performance with frequent regression.</p>
+                            <p><span class="solution-lead">Solution —</span> Implemented experience replay with a memory buffer of 100,000 experiences and a target network updated every 100 learning steps, significantly stabilizing the learning process.</p>
                         </div>
-                        
-                        <div class="content-section">
-                            <h2>Key Takeaways</h2>
-                            
-                            <div class="takeaways">
-                                <div class="takeaway-item">
-                                    <h3>Technical Insights</h3>
-                                    <ul>
-                                        <li>Reinforcement learning excels at problems where the optimal strategy isn't obvious to humans</li>
-                                        <li>Proper reward design is critical - small adjustments can dramatically affect learning</li>
-                                        <li>The exploration-exploitation tradeoff requires careful tuning for each specific environment</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="takeaway-item">
-                                    <h3>Broader Applications</h3>
-                                    <p>The techniques used here have applications far beyond simulated lunar landings:</p>
-                                    <ul>
-                                        <li>Robotic control systems</li>
-                                        <li>Autonomous vehicles</li>
-                                        <li>Resource management problems</li>
-                                        <li>Any system requiring decision-making with delayed rewards</li>
-                                    </ul>
-                                </div>
+
+                        <div class="challenge">
+                            <h3>Exploration vs. exploitation</h3>
+                            <p>The agent would often get stuck in local optima, learning to hover but never land.</p>
+                            <p><span class="solution-lead">Solution —</span> Fine-tuned the epsilon decay rate to ensure sufficient exploration and added reward shaping to encourage progress toward landing.</p>
+                        </div>
+
+                        <div class="challenge">
+                            <h3>Computational efficiency</h3>
+                            <p>Initial training was prohibitively slow on my personal computer.</p>
+                            <p><span class="solution-lead">Solution —</span> Optimized batch sizes and network architecture, and implemented periodic model saving to resume training if interrupted. This reduced training time by approximately 40%.</p>
+                        </div>
+                    </div>
+
+                    <div class="psection">
+                        <div class="pnum">04</div>
+                        <h2 class="mb-28">Key takeaways</h2>
+                        <div class="card-grid card-grid--two">
+                            <div class="info-card">
+                                <h3 class="sm">Technical insights</h3>
+                                <ul>
+                                    <li>Reinforcement learning excels at problems where the optimal strategy isn't obvious to humans</li>
+                                    <li>Proper reward design is critical — small adjustments can dramatically affect learning</li>
+                                    <li>The exploration-exploitation tradeoff requires careful tuning for each environment</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h3 class="sm">Broader applications</h3>
+                                <ul>
+                                    <li>Robotic control systems</li>
+                                    <li>Autonomous vehicles</li>
+                                    <li>Resource management problems</li>
+                                    <li>Any system requiring decision-making with delayed rewards</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    
-                    <aside class="sidebar">
-                        <div class="sidebar-section">
-                            <h3>Key Concepts</h3>
-                            <ul class="key-concepts">
-                                <li>
-                                    <strong>Q-Learning</strong>
-                                    <p>A model-free reinforcement learning algorithm to learn the value of actions in states</p>
-                                </li>
-                                <li>
-                                    <strong>Experience Replay</strong>
-                                    <p>Storing and randomly sampling past experiences to break correlations and improve learning stability</p>
-                                </li>
-                                <li>
-                                    <strong>Epsilon-Greedy Policy</strong>
-                                    <p>Balancing exploration and exploitation by sometimes taking random actions</p>
-                                </li>
-                                <li>
-                                    <strong>Neural Network Approximation</strong>
-                                    <p>Using deep learning to approximate the Q-function for complex state spaces</p>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="sidebar-section">
-                            <h3>Resources</h3>
-                            <ul class="resources-list">
-                                <li>
-                                    <a href="https://www.gymlibrary.dev/environments/box2d/lunar_lander/" target="_blank">
-                                        OpenAI Gym Lunar Lander Environment
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.tensorflow.org/" target="_blank">
-                                        TensorFlow Documentation
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://arxiv.org/abs/1312.5602" target="_blank">
-                                        DQN Original Paper
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
                 </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="side-card">
+                        <h3>Key concepts</h3>
+                        <div class="side-block">
+                            <div class="side-label">Q-LEARNING</div>
+                            <p>A model-free reinforcement learning algorithm to learn the value of actions in states</p>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label">EXPERIENCE REPLAY</div>
+                            <p>Storing and randomly sampling past experiences to break correlations and improve learning stability</p>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label">EPSILON-GREEDY POLICY</div>
+                            <p>Balancing exploration and exploitation by sometimes taking random actions</p>
+                        </div>
+                        <div class="side-block">
+                            <div class="side-label">NEURAL NETWORK APPROXIMATION</div>
+                            <p>Using deep learning to approximate the Q-function for complex state spaces</p>
+                        </div>
+                    </div>
+
+                    <div class="side-card">
+                        <h3>Resources</h3>
+                        <div class="resource-links">
+                            <a href="https://www.gymlibrary.dev/environments/box2d/lunar_lander/">OpenAI Gym Lunar Lander Environment</a>
+                            <a href="https://www.tensorflow.org/">TensorFlow Documentation</a>
+                            <a href="https://arxiv.org/abs/1312.5602">DQN Original Paper</a>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Mohamed Elhag. All rights reserved.</p>
-            <p class="footer-tagline">Building technology that puts you at the center.</p>
+    <!-- Footer -->
+    <footer class="project-footer">
+        <div class="fwrap">
+            <p class="prompt">Curious about the training run?</p>
+            <a href="mailto:contact@mohamedelhag.com" class="email-link">contact@mohamedelhag.com</a>
+            <div class="pfoot-meta">
+                <span>© 2026 Mohamed Elhag</span>
+                <span class="pfoot-tag">Building technology that puts you at the center.</span>
+            </div>
         </div>
     </footer>
 
